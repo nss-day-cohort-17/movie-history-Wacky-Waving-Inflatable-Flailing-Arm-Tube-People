@@ -1,0 +1,17 @@
+{
+  "name": "movie-history-Wacky-Waving-Inflatable-Flailing-Arm-Tube-People",
+  "homepage": "https://github.com/nss-day-cohort-17/movie-history-Wacky-Waving-Inflatable-Flailing-Arm-Tube-People",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
