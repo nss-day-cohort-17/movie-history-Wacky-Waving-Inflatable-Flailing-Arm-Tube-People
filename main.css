@@ -1,3 +1,5 @@
+
+
 .nav-element {
     padding: 2% 0 1.5%;
     text-align: center;
@@ -7,8 +9,20 @@
 #userInput {
     width: 70%;
     padding: 0;
+    height: 27px;
 }
 
 .heading {
     text-align: center;
+    margin: 0 0 2% 0;
+}
+
+.display-container {
+    padding: 0 3%;
+}
+
+.movieDisplay {
+    min-height: 300px;
+    margin: 1% 0;
+    border: 2px solid black;
 }
