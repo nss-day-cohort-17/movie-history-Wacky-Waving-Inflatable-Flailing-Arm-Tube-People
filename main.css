@@ -1,5 +1,12 @@
 .nav-element {
-    padding: 3% 0 1%;
+    padding: 2% 0 1.5%;
+    text-align: center;
+}
+
+
+#userInput {
+    width: 70%;
+    padding: 0;
 }
 
 .heading {
