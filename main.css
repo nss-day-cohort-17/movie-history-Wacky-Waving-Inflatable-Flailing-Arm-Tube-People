@@ -61,3 +61,7 @@
     margin: 5% 0 10%;
 
 }
+
+.img-small {
+    max-height: 100px;
+}
