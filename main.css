@@ -29,6 +29,10 @@
     padding: 0 3%;
 }
 
+.movies {
+    margin: 0 5%;    
+}
+
 .movieDisplay {
     font-family: 'Arvo', serif;
     min-height: 300px;
