@@ -1,9 +1,12 @@
+
 var currentMovie;
+
 
 $("#new-movies").click(function () {
   $(".movieDB-view").addClass("hide");
   $(".search-result").removeClass("hide");
 });
+
 
 $("#movie-db").click(function () {
   $(".movieDB-view").removeClass("hide");
@@ -27,9 +30,13 @@ $("#searchBtn").click(function() {
                                 <h4>${data.Actors}</h4>
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
-                                <button class="btn btn-info addToWatched">Add to watched movies </button>
-                                <button class="btn btn-success addToWatchlist">Add to movie watchlist</button>
                               `)
     }
   });
+  $(".search-view").removeClass("hide");
 });
+
+
+$('#addToWatchlist').click(function(){
+    console.log("hey");
+})
