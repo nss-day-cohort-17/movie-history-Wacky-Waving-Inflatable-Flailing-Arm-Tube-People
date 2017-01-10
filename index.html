@@ -19,8 +19,10 @@
                 <a href="#">Search Your Movies</a>
             </div>
             <div class="nav-element col-sm-7">
-                <input id="userInput">
-                <button type="button" name="button" id="">Search</button>
+                <form onSubmit="event.preventDefault();">
+                    <input type="text" id="userInput">
+                    <button type="submit" name="button" id="searchBtn">Search</button>
+                </form>
             </div>
 
             <div class="nav-element col-sm-1">
