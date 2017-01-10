@@ -39,3 +39,20 @@
     margin: 1% 0;
     border: 2px solid black;
 }
+
+.hide {
+    visibility: hidden;
+}
+
+.search-view img {
+    margin-left: 2%;
+    float: right;
+}
+
+.search-view h3 {
+    margin-top: 0;
+}
+
+.search-view button {
+    margin-left: 7%;
+}

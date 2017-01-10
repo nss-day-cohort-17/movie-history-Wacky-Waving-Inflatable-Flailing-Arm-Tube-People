@@ -13,14 +13,16 @@
           <div class="container">
 
             <div class="nav-element col-sm-2">
-                <a href="#">Find New Movies</a>
+                <a href="#" id="new-movies">Find New Movies</a>
             </div>
             <div class="nav-element col-sm-2">
-                <a href="#">Search Your Movies</a>
+                <a href="#" id="movie-db">Search Your Movies</a>
             </div>
             <div class="nav-element col-sm-7">
-                <input id="userInput"></input>
-                <button type="button" name="button" id="">Search</button>
+                <form onSubmit="event.preventDefault();">
+                    <input type="text" id="userInput">
+                    <button type="submit" name="button" id="searchBtn">Search</button>
+                </form>
             </div>
 
             <div class="nav-element col-sm-1">
@@ -34,12 +36,17 @@
         <div class="display-container row">
 
             <div class="heading col-sm-12">
-                <h1>Movie Histroy</h1>
-
+                <h1>Movie History</h1>
             </div>
         </div>
 
-        <div class="movies row">
+        <div class="container">
+
+        <div class="row search-view ">
+            <div class="col-sm-10 col-sm-offset-1 search-result"></div>
+        </div>
+
+        <div class="movies row movieDB-view hide">
 
             <div class="movieDisplay col-sm-4">
                 <h2>Movie name</h2>
@@ -95,8 +102,9 @@
             </div>
 
         </div>
+        </div>
 
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="app.js"></script>
     </body>
 </html>

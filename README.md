@@ -1,8 +1,12 @@
 # Movie History
 
+
+![](https://media.giphy.com/media/V1nbxs1VibOlW/giphy.gif)
+## Team Wacky Waving Inflatable Flailing Arm Tube People
+
 You will be split up into teams of three, and your team will build a new application to keep track of movies that you have seen, and want to see, with your own ratings based on [OMDb API](http://omdbapi.com/).
 
-## Requirements
+### Requirements
 1. Must have the ability to register a user in Firebase
 1. Must have the ability to log in
 1. You must use Firebase to store movies
@@ -19,6 +23,6 @@ You will be split up into teams of three, and your team will build a new applica
 1. It must be written with Angular
 1. For the layout, we suggest Bootstrap, but if you want to stretch your legs, you can try [Materialize](http://materializecss.com/).
 
-## Mockup
+### Mockup
 
 Review the [basic design](https://app.moqups.com/chortlehoort/uGBbLbK46Y/view/page/a3a0e7bf6) and ask questions to your product owner for clarification, or ideas on features.
