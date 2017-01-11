@@ -50,18 +50,24 @@ function getMovieData(data) {
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
                                 <button class="btn btn-info" id="addToMyList">+ My List</button>
-                                <button class="btn btn-success addToRecentlyWatched">+ Recently Watched</button>
-                              `)
+                                <button class="btn btn-success" id="addToRecentlyWatched">+ Recently Watched</button>
+                              `);
   addListener();
 }
 
 function yourMovies(data) {
+  var currentView;
+  if (flag) {
+    currentView = ".myList-view";
+  } else {
+    currentView = ".recentlyWatched-view";
+  }
     //console.log(data);
-    $('.movieDB-view').empty();
+    $(currentView).empty();
     Object.keys(data).forEach(function (id) {
         //console.log(data[id]);
 
-        $('.movieDB-view').append(`<div class="card" style="width: 20rem;">
+        $(currentView).append(`<div class="card" style="width: 20rem;">
         <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
         <div class="card-block">
         <h4 class="card-title">${data[id].Title}</h4>
