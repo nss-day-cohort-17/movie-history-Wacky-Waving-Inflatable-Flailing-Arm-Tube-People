@@ -9,17 +9,19 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
   $(".movieDB-view").removeClass("hide");
   $(".search-result").addClass("hide");
+
 });
 
 function nothing(data) {}
 
 function addListener() {
 
-  $("#addToWatched").click(function () {
+  $("#addToMyList").click(function () {
     console.log("it worked")
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
 
   });
 }
@@ -40,32 +42,37 @@ function getMovieData(data) {
   addListener();
 }
 
-$("#searchBtn").click(function() {
-  ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
-    });
-
-
 function yourMovies(data) {
     //console.log(data);
-  $('.movieDB-view').empty();
+    $('.movieDB-view').empty();
     Object.keys(data).forEach(function (id) {
-      //console.log(data[id]);
+        //console.log(data[id]);
 
-      $('.movieDB-view').append(`<div class="card" style="width: 20rem;">
-                                      <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
-                                      <div class="card-block">
-                                        <h4 class="card-title">${data[id].Title}</h4>
-                                        <p class="card-text">${data[id].Year}</p>
-                                        <p class="card-text">${data[id].Actors}</p>
-                                        <a href="#" class="btn btn-primary">Read Plot</a>
-                                      </div>
-                                    </div>`);
+        $('.movieDB-view').append(`<div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
+        <div class="card-block">
+        <h4 class="card-title">${data[id].Title}</h4>
+        <p class="card-text">${data[id].Year}</p>
+        <p class="card-text">${data[id].Actors}</p>
+        <a href="#" class="btn btn-primary">Read Plot</a>
+        </div>
+        </div>`);
     });
 }
 
-$('#myList').click(function(){
-  ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "GET", yourMovies);
+$("#searchBtn").click(function() {
+  ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
 });
+
+
+
+
+$('#recentlyWatched').click(function(){
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies)
+    $(".movieDB-view").removeClass("hide");
+    $(".search-result").addClass("hide");
+
+})
 
 
 
