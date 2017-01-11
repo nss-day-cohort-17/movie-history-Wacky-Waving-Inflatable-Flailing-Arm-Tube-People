@@ -1,18 +1,28 @@
 
 var currentMovie;
-
+var flag;
 
 $("#new-movies").click(function () {
-  $(".movieDB-view").addClass("hide");
-  $(".search-result").removeClass("hide");
+  $(".myList-view").addClass("hide");
+  $(".search-result-view").removeClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
 });
 
 
 $("#myList").click(function () {
     ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
-  $(".movieDB-view").removeClass("hide");
-  $(".search-result").addClass("hide");
+  $(".myList-view").removeClass("hide");
+  $(".search-result-view").addClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
+  flag = true;
+});
 
+$('#recentlyWatched').click(function(){
+  ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies);
+  $(".myList-view").addClass("hide");
+  $(".search-result-view").addClass("hide");
+  $(".recentlyWatched-view").removeClass("hide");
+  flag = false;
 });
 
 function nothing(data) {}
@@ -20,16 +30,19 @@ function nothing(data) {}
 function addListener() {
 
   $("#addToMyList").click(function () {
-    console.log("it worked")
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
+    console.log("it worked");
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+  });
 
+    $("#addToRecentlyWatched").click(function () {
+      console.log("it worked recently watched");
+      ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
-
 function getMovieData(data) {
   currentMovie = data;
   $("#userInput").val("");
-  $(".search-result").html(`
+  $(".search-result-view").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
                                 <h2>${data.Title}</h2>
                                 <h3>${data.Year}</h3>
@@ -37,18 +50,24 @@ function getMovieData(data) {
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
                                 <button class="btn btn-info" id="addToMyList">+ My List</button>
-                                <button class="btn btn-success addToRecentlyWatched">+ Recently Watched</button>
-                              `)
+                                <button class="btn btn-success" id="addToRecentlyWatched">+ Recently Watched</button>
+                              `);
   addListener();
 }
 
 function yourMovies(data) {
+  var currentView;
+  if (flag) {
+    currentView = ".myList-view";
+  } else {
+    currentView = ".recentlyWatched-view";
+  }
     //console.log(data);
-    $('.movieDB-view').empty();
+    $(currentView).empty();
     Object.keys(data).forEach(function (id) {
         //console.log(data[id]);
 
-        $('.movieDB-view').append(`<div class="card" style="width: 20rem;">
+        $(currentView).append(`<div class="card" style="width: 20rem;">
         <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
         <div class="card-block">
         <h4 class="card-title">${data[id].Title}</h4>
@@ -67,12 +86,6 @@ $("#searchBtn").click(function() {
 
 
 
-$('#recentlyWatched').click(function(){
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies)
-    $(".movieDB-view").removeClass("hide");
-    $(".search-result").addClass("hide");
-
-})
 
 
 
