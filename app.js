@@ -9,8 +9,10 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
   $(".movieDB-view").removeClass("hide");
   $(".search-result").addClass("hide");
+
 });
 
 function nothing(data) {}
@@ -63,13 +65,15 @@ $("#searchBtn").click(function() {
 });
 
 
-$('#myList').click(function(){
-  ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
-});
+
 
 $('#recentlyWatched').click(function(){
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json")
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies)
+    $(".movieDB-view").removeClass("hide");
+    $(".search-result").addClass("hide");
+
 })
+
 
 
 function ajaxCall(url, dType, type, fn, sendData) {
