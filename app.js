@@ -30,16 +30,19 @@ function nothing(data) {}
 function addListener() {
 
   $("#addToMyList").click(function () {
-    console.log("it worked")
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
+    console.log("it worked");
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+  });
 
+    $("#addToRecentlyWatched").click(function () {
+      console.log("it worked recently watched");
+      ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
-
 function getMovieData(data) {
   currentMovie = data;
   $("#userInput").val("");
-  $(".search-result").html(`
+  $(".search-result-view").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
                                 <h2>${data.Title}</h2>
                                 <h3>${data.Year}</h3>
@@ -77,12 +80,6 @@ $("#searchBtn").click(function() {
 
 
 
-$('#recentlyWatched').click(function(){
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies)
-    $(".movieDB-view").removeClass("hide");
-    $(".search-result").addClass("hide");
-
-})
 
 
 
