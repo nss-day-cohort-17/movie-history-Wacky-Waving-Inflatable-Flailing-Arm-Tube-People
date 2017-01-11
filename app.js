@@ -13,17 +13,21 @@ $("#movie-db").click(function () {
   $(".search-result").addClass("hide");
 });
 
+function nothing(data) {}
 
-$("#searchBtn").click(function() {
-  //console.log("it works");
-  $.ajax({
-    url: `http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`,
-    dataType: 'json',
-    success: function(data) {
-      console.log(data);
-      currentMovie = data;
-      $("#userInput").val("");
-      $(".search-result").html(`
+function addListener() {
+
+  $("#addToWatched").click(function () {
+    console.log("it worked")
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
+
+  });
+}
+
+function getMovieData(data) {
+  currentMovie = data;
+  $("#userInput").val("");
+  $(".search-result").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
                                 <h2>${data.Title}</h2>
                                 <h3>${data.Year}</h3>
