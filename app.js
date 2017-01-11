@@ -13,17 +13,21 @@ $("#movie-db").click(function () {
   $(".search-result").addClass("hide");
 });
 
+function nothing(data) {}
 
-$("#searchBtn").click(function() {
-  //console.log("it works");
-  $.ajax({
-    url: `http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`,
-    dataType: 'json',
-    success: function(data) {
-      console.log(data);
-      currentMovie = data;
-      $("#userInput").val("");
-      $(".search-result").html(`
+function addListener() {
+
+  $("#addToWatched").click(function () {
+    console.log("it worked")
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]))
+
+  });
+}
+
+function getMovieData(data) {
+  currentMovie = data;
+  $("#userInput").val("");
+  $(".search-result").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
                                 <h2>${data.Title}</h2>
                                 <h3>${data.Year}</h3>
@@ -33,58 +37,50 @@ $("#searchBtn").click(function() {
                                 <button class="btn btn-info" id="addToWatched">Add to watched movies </button>
                                 <button class="btn btn-success addToWatchlist">Add to movie watchlist</button>
                               `)
-      addListener();
-    }
-  });
-  $(".search-view").removeClass("hide");
+  addListener();
+}
+
+$("#searchBtn").click(function() {
+  ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
+    });
+
+
+function yourMovies(data) {
+    //console.log(data);
+  $('.movieDB-view').empty();
+    Object.keys(data).forEach(function (id) {
+      //console.log(data[id]);
+
+      $('.movieDB-view').append(`<div class="card" style="width: 20rem;">
+                                      <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
+                                      <div class="card-block">
+                                        <h4 class="card-title">${data[id].Title}</h4>
+                                        <p class="card-text">${data[id].Year}</p>
+                                        <p class="card-text">${data[id].Actors}</p>
+                                        <a href="#" class="btn btn-primary">Read Plot</a>
+                                      </div>
+                                    </div>`);
+    });
+}
+
+$('#movie-db').click(function(){
+  ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "GET", yourMovies);
 });
 
 
 
-$('#movie-db').click(function(){
-    console.log("hey");
-    $.ajax({
-        url: "https://movie-history-2c05c.firebaseio.com/.json",
-        dataType: 'json',
 
-        success: function(data) {
-            console.log(data);
-            var appendYourMovies = "";
-            for (var i = 0; i < data.yourMovies.length; i++) {
-                appendYourMovies += `<div class="card" style="width: 20rem;">
-                                      <img class="card-img-top" src="${data.yourMovies[i].Poster}" alt="${data.yourMovies[i].Title}">
-                                      <div class="card-block">
-                                        <h4 class="card-title">${data.yourMovies[i].Title}</h4>
-                                        <p class="card-text">${data.yourMovies[i].Year}</p>
-                                        <p class="card-text">${data.yourMovies[i].Actors}</p>
-                                        <a href="#" class="btn btn-primary">Read Plot</a>
-                                      </div>
-                                    </div>`
-            }
-            console.log(appendYourMovies);
-            $('.movieDB-view').html(appendYourMovies);
-        }
 
-    })
-})
-
-function addListener() {
-
-  console.log("works");
-  $("#addToWatched").click(function () {
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "POST", JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot"]))
-
-  });
-}
-
-function ajaxCall(url, type, data) {
+function ajaxCall(url, dType, type, fn, sendData) {
   $.ajax({
     url    : url,
-    type   : type,
-    data   : data,
+    datatype   : dType,
+    type: type,
+    data   : sendData,
     success: function (data) {
       console.log("works");
       console.log(data);
+      fn(data);
     }
   })
-};
+}
