@@ -72,16 +72,19 @@ function addListener() {
 
   console.log("works");
   $("#addToWatched").click(function () {
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "POST", JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot"]))
 
-    $.ajax({
-      url    : "https://practice-post.firebaseio.com/watched.json",
-      type   : "POST",
-      data   : JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot"]),
-      success: function (data) {
-        console.log("works");
-        console.log(data);
-      }
-    })
   });
 }
 
+function ajaxCall(url, type, data) {
+  $.ajax({
+    url    : url,
+    type   : type,
+    data   : data,
+    success: function (data) {
+      console.log("works");
+      console.log(data);
+    }
+  })
+};
