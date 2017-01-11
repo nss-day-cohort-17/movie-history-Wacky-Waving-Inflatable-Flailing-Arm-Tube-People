@@ -67,17 +67,17 @@ function yourMovies(data) {
     Object.keys(data).forEach(function (id) {
         //console.log(data[id]);
 
-        $(currentView).append(`<div class="card" style="width: 20rem;">
-        <img class="card-img-top" src="${data[id].Poster}" alt="${data[id].Title}">
-        <div class="card-block">
-        <h4 class="card-title">${data[id].Title}</h4>
-        <p class="card-text">${data[id].Year}</p>
-        <p class="card-text">${data[id].Actors}</p>
-        <a href="#" class="btn btn-primary">Read Plot</a>
-        </div>
-        </div>`);
+        $(currentView).append(`<div class="card col-md-4 col-lg-3">
+                                    <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
+                                    <div class="card-block">
+                                    <h3 class="card-title">${data[id].Title}</h4>
+                                    <a href="#" class="btn btn-primary card-text">Read Plot</a>
+                                    </div>
+                                </div>`);
     });
 }
+// <p class="card-text">${data[id].Year}</p>
+// <p class="card-text">${data[id].Actors}</p>
 
 $("#searchBtn").click(function() {
   ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);

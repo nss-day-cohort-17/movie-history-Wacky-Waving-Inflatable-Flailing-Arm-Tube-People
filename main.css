@@ -1,4 +1,6 @@
-
+.nav-bar {
+    background-color: #eee;
+}
 
 .nav-element {
     font-family: 'Arvo', serif;
@@ -7,6 +9,29 @@
     font-size: 14px;
 }
 
+.nav-btn {
+    color: #d81616;
+    text-decoration: none;
+}
+
+.nav-btn:hover {
+    font-weight: bold;
+    color: #d81616;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.nav-btn:visited {
+    text-decoration: none;
+    color: #d81616;
+
+}
+
+.container {
+    font-family: 'Arvo', serif;
+    padding: 0;
+    margin: auto;
+}
 
 #userInput {
     width: 70%;
@@ -21,7 +46,7 @@
 
 .heading > h1 {
     font-family: 'Bungee Shade', cursive;
-    font-size: 4em;
+    font-size: 6em;
 
 }
 
@@ -57,11 +82,30 @@
     margin-left: 7%;
 }
 
-.button-sect {
-    margin: 5% 0 10%;
+
+#searchBtn {
+    height: 27px;
 
 }
 
-.img-small {
-    max-height: 100px;
+.card {
+    margin: 4%;
+    padding: 3%;
+    min-height: 500px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    text-align: center;
+}
+
+
+.btn {
+    width: 100%;
+    border-radius: 2px;
+    background-color: black;
+    position: relative;
+    bottom: 0;
+
+}
+
+.btn:hover {
+    background-color: red;
 }
