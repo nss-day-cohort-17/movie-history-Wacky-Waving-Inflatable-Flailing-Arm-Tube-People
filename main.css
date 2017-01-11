@@ -69,8 +69,12 @@
     visibility: hidden;
 }
 
+.search-result-view {
+    margin-bottom: 25%;
+}
+
 .search-view img {
-    margin-left: 2%;
+    margin: 0 0 4% 4%;
     float: right;
 }
 
@@ -79,7 +83,7 @@
 }
 
 .search-view button {
-    margin-left: 7%;
+    margin-bottom: .5%;
 }
 
 
@@ -110,7 +114,6 @@
     background-color: red;
 }
 
-
 .carousel {
-
+    margin-bottom: 5%;
 }

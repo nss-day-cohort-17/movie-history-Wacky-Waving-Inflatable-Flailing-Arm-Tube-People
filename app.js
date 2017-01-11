@@ -123,6 +123,8 @@ function yourMovies(data) {
 
 $("#searchBtn").click(function() {
   ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
+  $(".carousel").addClass("hide");
+  $(".search-result-view").removeClass("hide");
 });
 
 
