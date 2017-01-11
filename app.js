@@ -8,7 +8,7 @@ $("#new-movies").click(function () {
 });
 
 
-$("#movie-db").click(function () {
+$("#myList").click(function () {
   $(".movieDB-view").removeClass("hide");
   $(".search-result").addClass("hide");
 });
@@ -34,8 +34,8 @@ function getMovieData(data) {
                                 <h4>${data.Actors}</h4>
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
-                                <button class="btn btn-info" id="addToWatched">Add to watched movies </button>
-                                <button class="btn btn-success addToWatchlist">Add to movie watchlist</button>
+                                <button class="btn btn-info" id="addToWatched">+ My List</button>
+                                <button class="btn btn-success addToRecentlyWatched">+ Recently Watched</button>
                               `)
   addListener();
 }
@@ -63,11 +63,9 @@ function yourMovies(data) {
     });
 }
 
-$('#movie-db').click(function(){
+$('#myList').click(function(){
   ajaxCall("https://movie-history-2c05c.firebaseio.com/watched.json", "json", "GET", yourMovies);
 });
-
-
 
 
 
