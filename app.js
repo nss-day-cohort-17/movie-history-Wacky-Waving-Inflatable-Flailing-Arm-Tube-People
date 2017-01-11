@@ -37,7 +37,7 @@ $("#searchBtn").click(function() {
 });
 
 
-$('#addToWatchlist').click(function(){
+$('#movie-db').click(function(){
     console.log("hey");
     $.ajax({
         url: "https://movie-history-2c05c.firebaseio.com/.json",
