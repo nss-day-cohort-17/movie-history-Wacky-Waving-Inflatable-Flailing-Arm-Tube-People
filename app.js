@@ -27,7 +27,7 @@ $('#recentlyWatched').click(function(){
 
 function nothing(data) {}
 
-function addListener() {
+function addListenersToSearchView() {
 
   $("#addToMyList").click(function () {
     console.log("it worked");
@@ -39,6 +39,21 @@ function addListener() {
       ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
+
+function addListenersToListViews() {
+
+  //$("#readPlot").click(function () {
+  //  console.log("it worked plot");
+  //  //ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+  //});
+
+  $("#removeMovie").click(function () {
+    console.log("it worked remove");
+    //ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+  });
+}
+
+
 function getMovieData(data) {
   currentMovie = data;
   $("#userInput").val("");
@@ -52,8 +67,10 @@ function getMovieData(data) {
                                 <button class="btn btn-info" id="addToMyList">+ My List</button>
                                 <button class="btn btn-success" id="addToRecentlyWatched">+ Recently Watched</button>
                               `);
-  addListener();
+  addListenersToSearchView();
 }
+
+
 
 function yourMovies(data) {
   var currentView;
@@ -64,17 +81,36 @@ function yourMovies(data) {
   }
     //console.log(data);
     $(currentView).empty();
-    Object.keys(data).forEach(function (id) {
+    Object.keys(data).forEach(function (id, i) {
         //console.log(data[id]);
+
 
         $(currentView).append(`<div class="card col-md-4 col-lg-3">
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
                                     <h3 class="card-title">${data[id].Title}</h4>
-                                    <a href="#" class="btn btn-primary card-text">Read Plot</a>
-                                    </div>
-                                </div>`);
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+
+                <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" id="${i}" role="document">
+                        <div class="modal-content">
+                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
+                            <h4 class="text-center">${data[id].Title}</h4>
+                            <p class="text-center">${data[id].Year}</p>
+                             <p class="text-center">${data[id].Actors}</p>
+                           <p>${data[id].Plot}</p>
+                        </div>
+                     </div>
+                </div>
+                <button type="button"class="btn btn-danger removeMovie">Remove</button>
+            </div>
+        </div>
+        `);
+
+
     });
+
+  addListenersToListViews()
 }
 // <p class="card-text">${data[id].Year}</p>
 // <p class="card-text">${data[id].Actors}</p>
