@@ -1,18 +1,28 @@
 
 var currentMovie;
-
+var flag;
 
 $("#new-movies").click(function () {
-  $(".movieDB-view").addClass("hide");
-  $(".search-result").removeClass("hide");
+  $(".myList-view").addClass("hide");
+  $(".search-result-view").removeClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
 });
 
 
 $("#myList").click(function () {
     ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
-  $(".movieDB-view").removeClass("hide");
-  $(".search-result").addClass("hide");
+  $(".myList-view").removeClass("hide");
+  $(".search-result-view").addClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
+  flag = true;
+});
 
+$('#recentlyWatched').click(function(){
+  ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies);
+  $(".myList-view").addClass("hide");
+  $(".search-result-view").addClass("hide");
+  $(".recentlyWatched-view").removeClass("hide");
+  flag = false;
 });
 
 function nothing(data) {}
