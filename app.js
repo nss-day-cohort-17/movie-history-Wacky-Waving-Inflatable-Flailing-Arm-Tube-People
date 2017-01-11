@@ -21,7 +21,7 @@ $("#searchBtn").click(function() {
     dataType: 'json',
     success: function(data) {
       console.log(data);
-      //currentMovie = data;
+      currentMovie = data;
       $("#userInput").val("");
       $(".search-result").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
@@ -30,11 +30,15 @@ $("#searchBtn").click(function() {
                                 <h4>${data.Actors}</h4>
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
+                                <button class="btn btn-info" id="addToWatched">Add to watched movies </button>
+                                <button class="btn btn-success addToWatchlist">Add to movie watchlist</button>
                               `)
+      addListener();
     }
   });
   $(".search-view").removeClass("hide");
 });
+
 
 
 $('#movie-db').click(function(){
@@ -63,3 +67,21 @@ $('#movie-db').click(function(){
 
     })
 })
+
+function addListener() {
+
+  console.log("works");
+  $("#addToWatched").click(function () {
+
+    $.ajax({
+      url    : "https://practice-post.firebaseio.com/watched.json",
+      type   : "POST",
+      data   : JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot"]),
+      success: function (data) {
+        console.log("works");
+        console.log(data);
+      }
+    })
+  });
+}
+
