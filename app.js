@@ -6,9 +6,9 @@ var flag;
 
 $("#new-movies").click(function () {
   $(".myList-view").addClass("hide");
-  $(".search-result-view").removeClass("hide");
   $(".recentlyWatched-view").addClass("hide");
-  $(".carousel").removeClass("hide");
+  $(".home").addClass("hide");
+  $(".search-view").removeClass("hide");
 });
 
 
