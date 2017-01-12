@@ -4,19 +4,26 @@ var flag;
 
 
 
+$("#home").click(function () {
+  $(".home").removeClass("hide");
+  $(".myList-view").addClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
+  $(".search-view").addClass("hide");
+});
+
 $("#new-movies").click(function () {
   $(".myList-view").addClass("hide");
-  $(".search-result-view").removeClass("hide");
   $(".recentlyWatched-view").addClass("hide");
-  $(".carousel").removeClass("hide");
+  $(".home").addClass("hide");
+  $(".search-view").removeClass("hide");
 });
 
 
 $("#myList").click(function () {
     ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
   $(".myList-view").removeClass("hide");
-  $(".search-result-view").addClass("hide");
-  $(".carousel").addClass("hide");
+  $(".search-view").addClass("hide");
+  $(".home").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
   flag = true;
 });
@@ -24,8 +31,8 @@ $("#myList").click(function () {
 $('#recentlyWatched').click(function(){
   ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies);
   $(".myList-view").addClass("hide");
-  $(".search-result-view").addClass("hide");
-  $(".carousel").addClass("hide");
+  $(".search-view").addClass("hide");
+  $(".home").addClass("hide");
   $(".recentlyWatched-view").removeClass("hide");
   flag = false;
 });
