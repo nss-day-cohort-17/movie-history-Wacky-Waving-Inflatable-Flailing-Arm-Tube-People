@@ -31,6 +31,24 @@ firebase.auth().onAuthStateChanged(() => {
 });
 
 
+function doAuth() {
+  var email = $("#uLogin").val();
+  var password = $("#uPassword").val();
+
+  if (target === "register") {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(clearlogin)
+            .then(authSuccess)
+            .catch(handleAuthErrors);
+  } else {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(clearlogin)
+            .then(authSuccess)
+            .catch(handleAuthErrors);
+  }
+};
+
+
 
 
 
