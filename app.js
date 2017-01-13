@@ -87,8 +87,8 @@ function getMovieData(data) {
                                 <h4>${data.Actors}</h4>
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
-                                <button class="btn" id="addToMyList">+ My List</button>
-                                <button class="btn" id="addToRecentlyWatched">+ Recently Watched</button>
+                                <button class="btn-list btn-add" id="addToMyList">+ My List</button>
+                                <button class="btn-list btn-add" id="addToRecentlyWatched">+ Recently Watched</button>
                               `);
   addListenersToSearchView();
 }
@@ -114,8 +114,8 @@ function yourMovies(data) {
                 <div class="modal fade bs-example-modal-lg${i}" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" id="${i}" role="document">
                         <div class="modal-content">
-                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
                             <h4 class="text-center">${data[id].Title}</h4>
+                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
                             <p class="text-center">${data[id].Year}</p>
                              <p class="text-center">${data[id].Actors}</p>
                            <p>${data[id].Plot}</p>

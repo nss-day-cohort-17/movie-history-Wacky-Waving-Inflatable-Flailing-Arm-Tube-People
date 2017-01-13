@@ -118,6 +118,7 @@
 
 
 .btn-list {
+    margin: .3% 0;
     width: 100%;
     border: 1px solid black;
     border-radius: 2px;
@@ -130,6 +131,18 @@
 
 .btn-list:hover {
     background-color: red;
+}
+
+.btn-add {
+    margin: .3% 0;
+    width: 25%;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background-color: black;
+    position: relative;
+    bottom: 0;
+    color: white;
 }
 
 .carousel {
@@ -175,7 +188,6 @@ background: #428bca;
 }
 
 .text-center {
-    font-size: 2em;
     margin-top: 10px;
     margin-bottom: 18px;
 }
@@ -202,4 +214,18 @@ background: #428bca;
 .input-group-addon {
     color: #fff;
     background: #3276B1;
+}
+
+
+
+
+
+@media (max-width: 1200px) {
+  .movies {
+    margin: 0 10%;
+  }
+  .card {
+      margin: 7%;
+  }
+
 }

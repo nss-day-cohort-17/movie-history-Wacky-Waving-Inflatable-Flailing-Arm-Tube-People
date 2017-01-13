@@ -178,8 +178,3 @@ $("#myModal").on("show.bs.modal", function (event) {
     $('.modal-title').text("Register Now!");
   clearlogin();
 });
-
-
-
-
-
