@@ -23,7 +23,7 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "GET", yourMovies);
+    ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "GET", yourMovies);
   $(".myList-view").removeClass("hide");
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
@@ -33,7 +33,7 @@ $("#myList").click(function () {
 });
 
 $('#recentlyWatched').click(function(){
-  ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "GET", yourMovies);
+  ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "GET", yourMovies);
   $(".myList-view").addClass("hide");
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
@@ -53,13 +53,13 @@ function addListenersToSearchView() {
 
   $("#addToMyList").click(function () {
     console.log("it worked");
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+    ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
     $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
     $("#addToRecentlyWatched").click(function (e) {
       console.log("it worked recently watched");
-      ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+      ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
 
@@ -175,6 +175,6 @@ function removeCard(data){
         divToRemove.remove();
         keyToDelete = _.findKey(data, ['Title', titleTarget]);
         console.log(keyToDelete);
-        ajaxCall(`https://movie-history-2c05c.firebaseio.com/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
+        ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
     })
 }
