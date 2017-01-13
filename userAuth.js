@@ -105,4 +105,47 @@ $('.modal-footer button').click(doAuth)
                        //.WHY(disNoWork?!)
 
 
+function authSuccess() {
+  var button = $('.modal-footer button');
+
+  if (button.attr("data-dismiss") != "modal") {
+    var inputs = $('form input');
+    var title = $('.modal-title');
+    var progress = $('.progress');
+    var progressBar = $('.progress-bar');
+
+    button.off("click");
+
+    inputs.attr("disabled", "disabled");
+    inputs.addClass("hidden");
+
+    button.hide();
+
+    progress.show();
+    progressBar.css("background-color", "#337ab7");
+    progressBar.animate({ width: "100%" }, 100);
+
+    progress.delay(1000)
+            .fadeOut(200);
+
+    button.removeClass("btn-primary")
+          .addClass("btn-success")
+          .blur()
+          .delay(1200)
+          .fadeIn(function () {
+            button.text("Enjoy!")
+            title.text("Welcome!");
+            button.attr("data-dismiss", "modal");
+
+          })
+          .delay(700)
+          .fadeOut(function () {
+            $('#myModal').modal('hide');
+
+          });
+  }
+
+}
+
+
 
