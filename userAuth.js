@@ -1,5 +1,5 @@
 var target;
-
+var userID;
 
 firebase.initializeApp({
   apiKey: "AIzaSyACP9Q8jHRH6ALMPF7B0CLED8Ph3gUJB_A",
@@ -12,6 +12,8 @@ firebase.initializeApp({
 
 firebase.auth().onAuthStateChanged(() => {
   if(firebase.auth().currentUser) {
+    userID = firebase.auth().currentUser.uid;
+    console.log(firebase.auth().currentUser)
     console.log("logged in");
     $(".register").addClass("hidden")
     $(".login").addClass("hidden")
