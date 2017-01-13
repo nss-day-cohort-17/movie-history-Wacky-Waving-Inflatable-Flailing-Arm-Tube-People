@@ -104,7 +104,7 @@ function yourMovies(data) {
                                     <h3 class="card-title">${data[id].Title}</h4>
                 <button type="button" class="btn-list btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
-                <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal fade bs-example-modal-lg${i}" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" id="${i}" role="document">
                         <div class="modal-content">
                             <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
@@ -125,6 +125,11 @@ function yourMovies(data) {
 
   addListenersToListViews()
 }
+
+$('#myModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+
 // <p class="card-text">${data[id].Year}</p>
 // <p class="card-text">${data[id].Actors}</p>
 
