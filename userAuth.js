@@ -97,4 +97,12 @@ function handleAuthErrors(error) {
 };
 
 
+$(".logout").click(doLogout);
+$('.modal-footer button').click(doAuth)
+                       //.then(clearlogin)
+                       //.then(authSuccess)
+                       //.catch(handleAuthErrors);
+                       //.WHY(disNoWork?!)
+
+
 
