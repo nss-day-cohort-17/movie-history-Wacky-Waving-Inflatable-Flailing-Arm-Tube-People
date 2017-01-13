@@ -59,7 +59,42 @@ function clearlogin() {
 }
 
 
+function handleAuthErrors(error) {
+  //alert(error.message)
 
+  var button = $('.modal-footer button');
+  var title = $('.modal-title');
+  var progress = $('.progress');
+  var progressBar = $('.progress-bar');
+
+  button.hide();
+
+  progress.show();
+
+  progressBar.animate({ width: "100%" }, 100);
+  progressBar.css("background-color", "red");
+
+  progress.delay(800)
+          .fadeOut(400);
+
+  button.text("Try Again!")
+        .removeClass("btn-primary")
+        .addClass("btn-danger")
+        .blur()
+        .delay(1200)
+        .fadeIn(function () {
+          title.text(error.message);
+          //button.attr("data-dismiss", "modal");
+          progressBar.css({ "width": "0%" });
+
+        })
+  button
+    .delay(1000)
+    .fadeIn(500)
+    .removeClass("btn-danger")
+    .addClass("btn-primary")
+
+};
 
 
 
