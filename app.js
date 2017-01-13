@@ -102,7 +102,7 @@ function yourMovies(data) {
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
                                     <h3 class="card-title">${data[id].Title}</h4>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+                <button type="button" class="btn-list btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
                 <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" id="${i}" role="document">
@@ -115,7 +115,7 @@ function yourMovies(data) {
                         </div>
                      </div>
                 </div>
-                <button type="button"class="btn btn-danger removeMovie">Remove</button>
+                <button type="button" class="btn-list btn-danger removeMovie">Remove</button>
             </div>
         </div>
         `);

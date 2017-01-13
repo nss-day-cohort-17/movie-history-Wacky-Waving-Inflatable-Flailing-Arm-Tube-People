@@ -111,7 +111,7 @@
 }
 
 
-.btn {
+.btn-list {
     width: 100%;
     border-radius: 2px;
     background-color: black;
@@ -120,7 +120,7 @@
 
 }
 
-.btn:hover {
+.btn-list:hover {
     background-color: red;
 }
 
