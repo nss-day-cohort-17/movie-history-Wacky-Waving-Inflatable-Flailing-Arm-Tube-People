@@ -49,6 +49,16 @@ function doAuth() {
 };
 
 
+function doLogout () {
+  firebase.auth().signOut()
+}
+
+
+function clearlogin() {
+  $("#loginForm").trigger("reset");
+}
+
+
 
 
 
