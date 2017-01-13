@@ -2,7 +2,7 @@
 var currentMovie;
 var flag;
 
-
+// ---------- NAV EVENTLISTENERS --------------
 
 $("#home").click(function () {
   $(".home").removeClass("hide");
@@ -36,6 +36,10 @@ $('#recentlyWatched').click(function(){
   $(".recentlyWatched-view").removeClass("hide");
   flag = false;
 });
+
+
+
+// ---------- HELPER FUNCTIONS --------------
 
 
 function nothing(data) {}
@@ -101,32 +105,50 @@ function yourMovies(data) {
         $(currentView).append(`<div class="card col-md-4 col-lg-3">
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
-                                    <h3 class="card-title">${data[id].Title}</h4>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+                                        <h3 class="card-title">${data[id].Title}</h4>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
-                <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" id="${i}" role="document">
-                        <div class="modal-content">
-                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
-                            <h4 class="text-center">${data[id].Title}</h4>
-                            <p class="text-center">${data[id].Year}</p>
-                             <p class="text-center">${data[id].Actors}</p>
-                           <p>${data[id].Plot}</p>
-                        </div>
-                     </div>
-                </div>
-                <button type="button"class="btn btn-danger removeMovie">Remove</button>
-            </div>
-        </div>
-        `);
+                                        <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                            <div class="modal-dialog modal-lg" id="${i}" role="document">
+                                                <div class="modal-content">
+                                                    <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
+                                                    <h4 class="text-center">${data[id].Title}</h4>
+                                                    <p class="text-center">${data[id].Year}</p>
+                                                     <p class="text-center">${data[id].Actors}</p>
+                                                   <p>${data[id].Plot}</p>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <button type="button" class="btn btn-danger removeMovie">Remove</button>
+                                    </div>
+                                </div>`);
 
 
     });
 
-  addListenersToListViews()
+    addListenersToListViews()
+    removeCard()
 }
 // <p class="card-text">${data[id].Year}</p>
 // <p class="card-text">${data[id].Actors}</p>
+
+function ajaxCall(url, dType, type, fn, sendData) {
+    $.ajax({
+        url    : url,
+        datatype   : dType,
+        type: type,
+        data   : sendData,
+        success: function (data) {
+            console.log("works");
+            console.log(data);
+            fn(data);
+        }
+    })
+}
+
+
+// ---------- CARD EVENTLISTENERS --------------
+
 
 $("#searchBtn").click(function() {
   ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
@@ -134,22 +156,13 @@ $("#searchBtn").click(function() {
   $(".search-result-view").removeClass("hide");
 });
 
+function removeCard(){
 
 
-
-
-
-
-function ajaxCall(url, dType, type, fn, sendData) {
-  $.ajax({
-    url    : url,
-    datatype   : dType,
-    type: type,
-    data   : sendData,
-    success: function (data) {
-      console.log("works");
-      console.log(data);
-      fn(data);
-    }
-  })
+    $('.removeMovie').click(function(e) {
+        var divToRemove = e.target.closest(".card")
+        divToRemove.remove();
+        console.log(divToRemove);
+        ajaxCall("https://movie-history-2c05c.firebaseio.com/", dType, "DELETE", yourMovies(data), sendData)
+    })
 }
