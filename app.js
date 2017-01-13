@@ -54,9 +54,10 @@ function addListenersToSearchView() {
   $("#addToMyList").click(function () {
     console.log("it worked");
     ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+    $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
-    $("#addToRecentlyWatched").click(function () {
+    $("#addToRecentlyWatched").click(function (e) {
       console.log("it worked recently watched");
       ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
@@ -86,8 +87,8 @@ function getMovieData(data) {
                                 <h4>${data.Actors}</h4>
                                 <h5>IMDB Rating: ${data.imdbRating}</h5>
                                 <p>${data.Plot}</p>
-                                <button class="btn btn-info" id="addToMyList">+ My List</button>
-                                <button class="btn btn-success" id="addToRecentlyWatched">+ Recently Watched</button>
+                                <button class="btn" id="addToMyList">+ My List</button>
+                                <button class="btn" id="addToRecentlyWatched">+ Recently Watched</button>
                               `);
   addListenersToSearchView();
 }
@@ -121,7 +122,7 @@ function yourMovies(data) {
                                                 </div>
                                              </div>
                                         </div>
-                                        <button type="button" class="btn btn-danger removeMovie">Remove</button>
+                                        <button type="button" class="btn removeMovie">Remove</button>
                                     </div>
                                 </div>`);
 
@@ -164,9 +165,10 @@ function removeCard(data){
     $('.removeMovie').click(function(e) {
         var divToRemove = e.target.closest(".card")
         var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
-
+        console.log(titleTarget, divToRemove);
         divToRemove.remove();
         keyToDelete = _.findKey(data, ['Title', titleTarget]);
+        console.log(keyToDelete);
         ajaxCall(`https://movie-history-2c05c.firebaseio.com/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
     })
 }

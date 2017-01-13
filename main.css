@@ -114,14 +114,20 @@
 
 .btn {
     width: 100%;
+    border: 1px solid black;
     border-radius: 2px;
     background-color: black;
     position: relative;
     bottom: 0;
-
+    color: white;
 }
 
 .btn:hover {
+    background-color: white;
+    color: red;
+}
+
+.btn-success {
     background-color: red;
 }
 
@@ -163,5 +169,12 @@ background: #428bca;
 }
 
 .modal-content {
-    padding: 5%;
+    padding: 9%;
+    border: 1px solid red;
+}
+
+.text-center {
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 18px;
 }
