@@ -108,23 +108,24 @@ function yourMovies(data) {
         $(`.${currentView}`).append(`<div class="card col-md-4 col-lg-3">
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
-                                        <h3 class="card-title">${data[id].Title}</h3>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+                                    <h3 class="card-title">${data[id].Title}</h4>
+                <button type="button" class="btn-list btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
-                                        <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                            <div class="modal-dialog modal-lg" id="${i}" role="document">
-                                                <div class="modal-content">
-                                                <h4 class="text-center">${data[id].Title}</h4>
-                                                    <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
-                                                    <p class="text-center">${data[id].Year}</p>
-                                                    <p class="text-center">${data[id].Actors}</p>
-                                                    <p>${data[id].Plot}</p>
-                                                </div>
-                                             </div>
-                                        </div>
-                                        <button type="button" class="btn removeMovie">Remove</button>
-                                    </div>
-                                </div>`);
+                <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" id="${i}" role="document">
+                        <div class="modal-content">
+                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
+                            <h4 class="text-center">${data[id].Title}</h4>
+                            <p class="text-center">${data[id].Year}</p>
+                             <p class="text-center">${data[id].Actors}</p>
+                           <p>${data[id].Plot}</p>
+                        </div>
+                     </div>
+                </div>
+                <button type="button" class="btn-list btn-danger removeMovie">Remove</button>
+            </div>
+        </div>
+        `);
 
 
     });

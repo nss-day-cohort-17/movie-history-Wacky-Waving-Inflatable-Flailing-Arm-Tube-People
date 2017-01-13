@@ -1,12 +1,17 @@
+#nav-height{
+    min-height: 65px;
+}
+
 .nav-bar {
     background-color: #eee;
     border-bottom: 2px solid black;
+
 }
 
 .nav-element {
     font-family: 'Arvo', serif;
     margin: 0 2% 0 0;
-    padding: 2% 0 1.5%;
+    padding: 2% 0 0;
     text-align: center;
     font-size: 14px;
 }
@@ -112,7 +117,7 @@
 }
 
 
-.btn {
+.btn-list {
     width: 100%;
     border: 1px solid black;
     border-radius: 2px;
@@ -122,12 +127,8 @@
     color: white;
 }
 
-.btn:hover {
-    background-color: white;
-    color: red;
-}
 
-.btn-success {
+.btn-list:hover {
     background-color: red;
 }
 
@@ -177,4 +178,27 @@ background: #428bca;
     font-size: 2em;
     margin-top: 10px;
     margin-bottom: 18px;
+
+
+/***** USER AUTH STYLES *****/
+
+
+.modal-dialog {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+.modal-footer .btn {
+    font-weight: bold;
+}
+.modal-footer .progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
 }
