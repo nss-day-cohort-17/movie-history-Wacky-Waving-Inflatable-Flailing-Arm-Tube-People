@@ -1,5 +1,6 @@
 
 var currentMovie;
+var currentView;
 var flag;
 
 // ---------- NAV EVENTLISTENERS --------------
@@ -9,6 +10,7 @@ $("#home").click(function () {
   $(".myList-view").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
   $(".search-view").addClass("hide");
+  $(".heading h1").html("Movie History")
 });
 
 $("#new-movies").click(function () {
@@ -16,6 +18,7 @@ $("#new-movies").click(function () {
   $(".recentlyWatched-view").addClass("hide");
   $(".home").addClass("hide");
   $(".search-view").removeClass("hide");
+  $(".heading h1").html("Search Movies")
 });
 
 
@@ -25,6 +28,7 @@ $("#myList").click(function () {
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
+  $(".heading h1").html("My List")
   flag = true;
 });
 
@@ -34,6 +38,7 @@ $('#recentlyWatched').click(function(){
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
   $(".recentlyWatched-view").removeClass("hide");
+  $(".heading h1").html("Recently Watched")
   flag = false;
 });
 
@@ -88,8 +93,6 @@ function getMovieData(data) {
 }
 
 
-
-var currentView;
 function yourMovies(data) {
   if (flag) {
     currentView = "myList-view";
@@ -110,11 +113,11 @@ function yourMovies(data) {
                                         <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                             <div class="modal-dialog modal-lg" id="${i}" role="document">
                                                 <div class="modal-content">
+                                                <h4 class="text-center">${data[id].Title}</h4>
                                                     <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
-                                                    <h4 class="text-center">${data[id].Title}</h4>
                                                     <p class="text-center">${data[id].Year}</p>
-                                                     <p class="text-center">${data[id].Actors}</p>
-                                                   <p>${data[id].Plot}</p>
+                                                    <p class="text-center">${data[id].Actors}</p>
+                                                    <p>${data[id].Plot}</p>
                                                 </div>
                                              </div>
                                         </div>
@@ -133,15 +136,15 @@ function yourMovies(data) {
 
 function ajaxCall(url, dType, type, fn, sendData) {
     $.ajax({
-        url    : url,
+        url        : url,
         datatype   : dType,
-        type: type,
-        data   : sendData,
-        success: function (data) {
-            console.log("works");
-            console.log(data);
-            fn(data);
-        }
+        type       : type,
+        data       : sendData,
+        success    : function (data) {
+                        console.log("works");
+                        console.log(data);
+                        fn(data);
+                    }
     })
 }
 
@@ -156,7 +159,6 @@ $("#searchBtn").click(function() {
 });
 
 function removeCard(data){
-    var keys = (Object.keys(data));
     var keyToDelete;
 
     $('.removeMovie').click(function(e) {
