@@ -89,22 +89,22 @@ function getMovieData(data) {
 
 
 
+var currentView;
 function yourMovies(data) {
-  var currentView;
   if (flag) {
-    currentView = ".myList-view";
+    currentView = "myList-view";
   } else {
-    currentView = ".recentlyWatched-view";
+    currentView = "recentlyWatched-view";
   }
     //console.log(data);
-    $(currentView).empty();
+    $(`.${currentView}`).empty();
     Object.keys(data).forEach(function (id, i) {
         //console.log(data[id]);
 
-        $(currentView).append(`<div class="card col-md-4 col-lg-3">
+        $(`.${currentView}`).append(`<div class="card col-md-4 col-lg-3">
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
-                                        <h3 class="card-title">${data[id].Title}</h4>
+                                        <h3 class="card-title">${data[id].Title}</h3>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
                                         <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -156,11 +156,15 @@ $("#searchBtn").click(function() {
 });
 
 function removeCard(data){
-    console.log(Object.keys(data));
+    var keys = (Object.keys(data));
+    var keyToDelete;
 
     $('.removeMovie').click(function(e) {
         var divToRemove = e.target.closest(".card")
+        var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
+
         divToRemove.remove();
-        ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view/-KaDxGf3N9RCKmYCgES1/.json", "json", "DELETE", nothing)
+        keyToDelete = _.findKey(data, ['Title', titleTarget]);
+        ajaxCall(`https://movie-history-2c05c.firebaseio.com/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
     })
 }
