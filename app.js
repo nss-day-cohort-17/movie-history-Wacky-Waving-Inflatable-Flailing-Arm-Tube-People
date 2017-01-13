@@ -4,19 +4,26 @@ var flag;
 
 
 
+$("#home").click(function () {
+  $(".home").removeClass("hide");
+  $(".myList-view").addClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
+  $(".search-view").addClass("hide");
+});
+
 $("#new-movies").click(function () {
   $(".myList-view").addClass("hide");
-  $(".search-result-view").removeClass("hide");
   $(".recentlyWatched-view").addClass("hide");
-  $(".carousel").removeClass("hide");
+  $(".home").addClass("hide");
+  $(".search-view").removeClass("hide");
 });
 
 
 $("#myList").click(function () {
     ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
   $(".myList-view").removeClass("hide");
-  $(".search-result-view").addClass("hide");
-  $(".carousel").addClass("hide");
+  $(".search-view").addClass("hide");
+  $(".home").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
   flag = true;
 });
@@ -24,8 +31,8 @@ $("#myList").click(function () {
 $('#recentlyWatched').click(function(){
   ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies);
   $(".myList-view").addClass("hide");
-  $(".search-result-view").addClass("hide");
-  $(".carousel").addClass("hide");
+  $(".search-view").addClass("hide");
+  $(".home").addClass("hide");
   $(".recentlyWatched-view").removeClass("hide");
   flag = false;
 });
@@ -95,7 +102,7 @@ function yourMovies(data) {
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
                                     <h3 class="card-title">${data[id].Title}</h4>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+                <button type="button" class="btn-list btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
                 <div class="modal fade bs-example-modal-lg${i}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" id="${i}" role="document">
@@ -108,7 +115,7 @@ function yourMovies(data) {
                         </div>
                      </div>
                 </div>
-                <button type="button"class="btn btn-danger removeMovie">Remove</button>
+                <button type="button" class="btn-list btn-danger removeMovie">Remove</button>
             </div>
         </div>
         `);
