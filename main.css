@@ -66,7 +66,8 @@
 .heading > h1 {
     font-family: 'Bungee Shade', cursive;
     font-size: 6em;
-
+    margin-top: -8px;
+    margin-bottom: 2px;
 }
 
 .display-container {
@@ -118,12 +119,14 @@
 
 .btn-list {
     width: 100%;
+    border: 1px solid black;
     border-radius: 2px;
     background-color: black;
     position: relative;
     bottom: 0;
-
+    color: white;
 }
+
 
 .btn-list:hover {
     background-color: red;
@@ -166,6 +169,15 @@ background: #428bca;
     max-width: 300px;
 }
 
+.modal-content {
+    padding: 9%;
+    border: 1px solid red;
+}
+
+.text-center {
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 18px;
 
 
 /***** USER AUTH STYLES *****/
