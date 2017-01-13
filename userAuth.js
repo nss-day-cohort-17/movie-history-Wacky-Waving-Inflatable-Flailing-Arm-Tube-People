@@ -2,11 +2,11 @@ var target;
 
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDy-m7zSm8n2VvqQpDcH4g2YpbgkaYNoPc",
-  authDomain: "test-351e3.firebaseapp.com",
-  databaseURL: "https://test-351e3.firebaseio.com",
-  storageBucket: "test-351e3.appspot.com",
-  messagingSenderId: "117618747620"
+  apiKey: "AIzaSyACP9Q8jHRH6ALMPF7B0CLED8Ph3gUJB_A",
+  authDomain: "movie-history-2c05c.firebaseapp.com",
+  databaseURL: "https://movie-history-2c05c.firebaseio.com",
+  storageBucket: "movie-history-2c05c.appspot.com",
+  messagingSenderId: "887772130666"
 });
 
 
