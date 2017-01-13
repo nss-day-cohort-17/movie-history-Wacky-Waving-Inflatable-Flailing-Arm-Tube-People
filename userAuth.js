@@ -10,6 +10,26 @@ firebase.initializeApp({
 });
 
 
+firebase.auth().onAuthStateChanged(() => {
+  if(firebase.auth().currentUser) {
+    console.log("logged in");
+    $(".register").addClass("hidden")
+    $(".login").addClass("hidden")
+               .delay(1000)
+               .fadeIn(function () {
+                 $(".logout").removeClass("hidden");
+               });
+  } else {
+    console.log("logged out");
+    $(".logout").addClass("hidden")
+                .delay(1000)
+                .fadeIn(function () {
+                  $(".register").removeClass("hidden");
+                  $(".login").removeClass("hidden");
+                });
+  }
+});
+
 
 
 
