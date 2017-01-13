@@ -20,7 +20,7 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "GET", yourMovies);
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "GET", yourMovies);
   $(".myList-view").removeClass("hide");
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
@@ -29,7 +29,7 @@ $("#myList").click(function () {
 });
 
 $('#recentlyWatched').click(function(){
-  ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "GET", yourMovies);
+  ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "GET", yourMovies);
   $(".myList-view").addClass("hide");
   $(".search-view").addClass("hide");
   $(".home").addClass("hide");
@@ -48,12 +48,12 @@ function addListenersToSearchView() {
 
   $("#addToMyList").click(function () {
     console.log("it worked");
-    ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+    ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 
     $("#addToRecentlyWatched").click(function () {
       console.log("it worked recently watched");
-      ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+      ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
 
@@ -61,12 +61,12 @@ function addListenersToListViews() {
 
   //$("#readPlot").click(function () {
   //  console.log("it worked plot");
-  //  //ajaxCall("https://movie-history-2c05c.firebaseio.com/my-list.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+  //  //ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   //});
 
   $("#removeMovie").click(function () {
     console.log("it worked remove");
-    //ajaxCall("https://movie-history-2c05c.firebaseio.com/recently-watched.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+    //ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
   });
 }
 
@@ -101,7 +101,6 @@ function yourMovies(data) {
     Object.keys(data).forEach(function (id, i) {
         //console.log(data[id]);
 
-
         $(currentView).append(`<div class="card col-md-4 col-lg-3">
                                     <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
                                     <div class="card-block">
@@ -127,7 +126,7 @@ function yourMovies(data) {
     });
 
     addListenersToListViews()
-    removeCard()
+    removeCard(data)
 }
 // <p class="card-text">${data[id].Year}</p>
 // <p class="card-text">${data[id].Actors}</p>
@@ -156,13 +155,12 @@ $("#searchBtn").click(function() {
   $(".search-result-view").removeClass("hide");
 });
 
-function removeCard(){
-
+function removeCard(data){
+    console.log(Object.keys(data));
 
     $('.removeMovie').click(function(e) {
         var divToRemove = e.target.closest(".card")
         divToRemove.remove();
-        console.log(divToRemove);
-        ajaxCall("https://movie-history-2c05c.firebaseio.com/", dType, "DELETE", yourMovies(data), sendData)
+        ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view/-KaDxGf3N9RCKmYCgES1/.json", "json", "DELETE", nothing)
     })
 }
