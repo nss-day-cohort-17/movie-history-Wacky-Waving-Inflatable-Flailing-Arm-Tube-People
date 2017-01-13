@@ -145,7 +145,41 @@ function authSuccess() {
           });
   }
 
-}
+};
+
+
+$('#myModal').on('hidden.bs.modal', function (e) {
+  var inputs = $('form input');
+  var title = $('.modal-title');
+  var progressBar = $('.progress-bar');
+  var button = $('.modal-footer button');
+
+  inputs.removeAttr("disabled");
+  inputs.removeClass("hidden");
+
+  progressBar.css({ "width": "0%" });
+
+  button.removeClass("btn-success")
+        .addClass("btn-primary")
+        .text("Submit")
+        .removeAttr("data-dismiss")
+        .css("display", "block")
+        .click(doAuth);
+
+});
+
+
+$("#myModal").on("show.bs.modal", function (event) {
+  var btnClick = $(event.relatedTarget);
+  target = btnClick.data("whatever");
+  if(target === "login") {
+    $('.modal-title').text("Login");
+  } else
+    $('.modal-title').text("Register Now!");
+  clearlogin();
+});
+
+
 
 
 
