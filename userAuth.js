@@ -13,22 +13,19 @@ firebase.initializeApp({
 firebase.auth().onAuthStateChanged(() => {
   if(firebase.auth().currentUser) {
     userID = firebase.auth().currentUser.uid;
-    console.log(firebase.auth().currentUser)
+    console.log(firebase.auth().currentUser);
     console.log("logged in");
-    $(".register").addClass("hidden")
-    $(".login").addClass("hidden")
-               .delay(1000)
-               .fadeIn(function () {
-                 $(".logout").removeClass("hidden");
-               });
+    $(".register").slideDown("slow").hide();
+    $(".login").slideDown("slow").hide();
+    $(".nav-link").slideDown("slow");
+    $(".logout").slideDown("slow");
+
   } else {
     console.log("logged out");
-    $(".logout").addClass("hidden")
-                .delay(1000)
-                .fadeIn(function () {
-                  $(".register").removeClass("hidden");
-                  $(".login").removeClass("hidden");
-                });
+    $(".register").slideDown("slow");
+    $(".login").slideDown("slow");
+    $(".nav-link").slideDown("slow").hide();
+    $(".logout").slideDown("slow").hide();
   }
 });
 
