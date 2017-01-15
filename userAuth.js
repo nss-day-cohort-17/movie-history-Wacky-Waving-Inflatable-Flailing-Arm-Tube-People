@@ -13,22 +13,19 @@ firebase.initializeApp({
 firebase.auth().onAuthStateChanged(() => {
   if(firebase.auth().currentUser) {
     userID = firebase.auth().currentUser.uid;
-    console.log(firebase.auth().currentUser)
+    console.log(firebase.auth().currentUser);
     console.log("logged in");
-    $(".register").addClass("hidden")
-    $(".login").addClass("hidden")
-               .delay(1000)
-               .fadeIn(function () {
-                 $(".logout").removeClass("hidden");
-               });
+    $(".register").addClass("hidden");
+    $(".login").addClass("hidden");
+    $(".nav-link").hide().removeClass("hidden").delay(2000).slideDown("slow");
+    $(".logout").hide().removeClass("hidden").delay(2000).slideDown("slow");
+
   } else {
     console.log("logged out");
-    $(".logout").addClass("hidden")
-                .delay(1000)
-                .fadeIn(function () {
-                  $(".register").removeClass("hidden");
-                  $(".login").removeClass("hidden");
-                });
+    $(".register").hide().removeClass("hidden").delay(700).slideDown("slow");
+    $(".login").hide().removeClass("hidden").delay(700).slideDown("slow");
+    $(".nav-link").addClass("hidden");
+    $(".logout").addClass("hidden");
   }
 });
 
@@ -74,10 +71,12 @@ function handleAuthErrors(error) {
   progress.show();
 
   progressBar.animate({ width: "100%" }, 100);
-  progressBar.css("background-color", "red");
+  progressBar.css("background-color", "#d9534f");
+  $(".modal-user").css("border-color", "#d9534f");
+  $(".input-group-addon").css("background", "#d9534f");
 
-  progress.delay(800)
-          .fadeOut(400);
+
+  progress.fadeOut(1200);
 
   button.text("Try Again!")
         .removeClass("btn-primary")
@@ -91,8 +90,7 @@ function handleAuthErrors(error) {
 
         })
   button
-    .delay(1000)
-    .fadeIn(500)
+    .fadeIn(1200)
     .removeClass("btn-danger")
     .addClass("btn-primary")
 
@@ -124,18 +122,20 @@ function authSuccess() {
     button.hide();
 
     progress.show();
-    progressBar.css("background-color", "#337ab7");
-    progressBar.animate({ width: "100%" }, 100);
+    progressBar.css("background-color", "#5cb85c");
+    progressBar.animate({ width: "100%" }, 100)
+    progressBar.css("background-color", "#5cb85c");
+    $(".modal-user").css("border-color", "#5cb85c");
+    $(".input-group-addon").css("background", "#5cb85c");
 
-    progress.delay(1000)
-            .fadeOut(200);
+    progress.fadeOut(1200);
 
     button.removeClass("btn-primary")
           .addClass("btn-success")
           .blur()
           .delay(1200)
           .fadeIn(function () {
-            button.text("Enjoy!")
+            button.text("Enjoy!");
             title.text("Welcome!");
             button.attr("data-dismiss", "modal");
 
@@ -160,7 +160,8 @@ $('#myModal').on('hidden.bs.modal', function (e) {
   inputs.removeClass("hidden");
 
   progressBar.css({ "width": "0%" });
-
+  $(".modal-user").css("border-color", "#3276B1");
+  $(".input-group-addon").css("background", "#3276B1");
   button.removeClass("btn-success")
         .addClass("btn-primary")
         .text("Submit")
