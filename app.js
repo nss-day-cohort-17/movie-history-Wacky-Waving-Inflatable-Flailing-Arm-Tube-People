@@ -26,7 +26,7 @@ $("#myList").click(function () {
   $(".search-view").addClass("hide");
   $(".home-view").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
-  $(".heading h1").html("My List")
+  $(".heading h1").html("My List");
   flag = true;
 });
 
@@ -36,7 +36,7 @@ $('#recentlyWatched').click(function(){
   $(".search-view").addClass("hide");
   $(".home-view").addClass("hide");
   $(".recentlyWatched-view").removeClass("hide");
-  $(".heading h1").html("Recently Watched")
+  $(".heading h1").html("Recently Watched");
   flag = false;
 });
 
@@ -61,14 +61,12 @@ function addListenersToSearchView() {
     $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
-    $("#addToRecentlyWatched").click(function (e) {
+    $("#addToRecentlyWatched").click(function () {
       console.log("it worked recently watched");
       $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
 
     });
 };
-
-
 
 function getData() {
   $.getJSON(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`)
