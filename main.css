@@ -34,6 +34,18 @@
 
 }
 
+.related-btn {
+    color: #d81616;
+    text-decoration: none;
+}
+
+.related-btn:hover {
+
+    color: #d81616;
+    text-decoration: underline;
+}
+
+
 .container {
     font-family: 'Arvo', serif;
     padding: 0;
@@ -95,8 +107,11 @@
 }
 
 .search-view img {
-    margin: 0 0 4% 4%;
-    float: right;
+    margin: 0 4% 4% 0;
+    height:300px;
+    width: 200px;
+
+    float: left;
 }
 
 .search-view h3 {
@@ -105,6 +120,10 @@
 
 .search-view button {
     margin-bottom: .5%;
+}
+
+.related-results a {
+    display: block;
 }
 
 
