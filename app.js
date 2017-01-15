@@ -2,6 +2,7 @@
 var currentMovie;
 var currentView;
 var flag;
+var dbSnapshot;
 
 // ---------- NAV EVENTLISTENERS --------------
 
@@ -125,6 +126,7 @@ function displayMovieData(data) {
 
 
 function yourMovies(data) {
+  dbSnapshot = data;
   if (flag) {
     currentView = "myList-view";
   } else {
@@ -136,58 +138,81 @@ function yourMovies(data) {
         //console.log(data[id]);
 
         $(`.${currentView}`).append(`<div class="card col-md-4 col-lg-3">
-                                    <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
-                                    <div class="card-block">
-                                    <h3 class="card-title">${data[id].Title}</h4>
-                <button type="button" class="btn-list btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
+                                       <img class="img-responsive card-img-top center-block" src="${data[id].Poster}" alt="${data[id].Title}">
+                                       <div class="card-block">
+                                         <h3 class="card-title">${data[id].Title}</h4>
+                                         <button type="button" class="btn-list" data-toggle="modal" data-target=".bs-example-modal-lg${i}">More Info</button>
 
-                <div class="modal fade bs-example-modal-lg${i}" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" id="${i}" role="document">
-                        <div class="modal-content">
-                            <h4 class="text-center">${data[id].Title}</h4>
-                            <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
-                            <p class="text-center">${data[id].Year}</p>
-                             <p class="text-center">${data[id].Actors}</p>
-                           <p>${data[id].Plot}</p>
-                        </div>
-                     </div>
-                </div>
-                <button type="button" class="btn-list btn-danger removeMovie">Remove</button>
-            </div>
-        </div>
-        `);
+                                         <div class="modal fade bs-example-modal-lg${i}" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                           <div class="modal-dialog modal-lg" id="${i}" role="document">
+                                             <div class="modal-content">
+                                               <h4 class="text-center">${data[id].Title}</h4>
+                                               <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
+                                               <p class="text-center">${data[id].Year}</p>
+                                               <p class="text-center">${data[id].Actors}</p>
+                                               <p>${data[id].Plot}</p>
+                                             </div>
+                                           </div>
+                                         </div>
+                                         <button type="button" class="btn-list removeMovie">Remove</button>
+                                         <button type="button" class="btn-list onlyMyList moveMovie">Watched</button>
+                                       </div>
+                                     </div>
+                                   `);
 
 
     });
-
-    addListenersToListViews()
-    removeCard(data)
+    if ($(".myList-view").hasClass("hide")) {
+      $(".onlyMyList").addClass("hide");
+    } else {
+      $(".onlyMyList").removeClass("hide");
+    }
+  $('.removeMovie').click(removeCard);
+  $('.moveMovie').click(moveCard);
 }
 
 
-// ---------- CARD EVENTLISTENERS --------------
+// ---------- CARD FUNCTIONS --------------
 
 
 $("#searchBtn").click(getData);
+//$('.removeMovie').click(removeCard);
 
-function removeCard(data){
+
+function removeCard(e){
     var keyToDelete;
-
-    $('.removeMovie').click(function(e) {
         var divToRemove = e.target.closest(".card")
         var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
         console.log(titleTarget, divToRemove);
         divToRemove.remove();
-        keyToDelete = _.findKey(data, ['Title', titleTarget]);
+        keyToDelete = _.findKey(dbSnapshot, ["Title", titleTarget]);
         console.log(keyToDelete);
 
         $.ajax({
         url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
         datatype   : "json",
         type       : "DELETE",
+
       });
-    })
 };
+
+function moveCard(e) {
+
+  var divToRemove = e.target.closest(".card")
+  var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
+  keyToMove = _.findKey(dbSnapshot, ["Title", titleTarget]);
+  $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view/${keyToMove}.json`)
+    .then(function (data) {
+      removeCard(e);
+      divToRemove.remove();
+      $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(data, ["Title", "Year", "Actors", "Plot", "Poster"]))
+      })
+        .then(function () {
+      console.log("Moved");
+      })
+}
+
+
 
 $('#myModal').modal('hide');
 $('body').removeClass('modal-open');
