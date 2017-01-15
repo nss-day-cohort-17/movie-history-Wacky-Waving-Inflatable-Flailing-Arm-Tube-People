@@ -45,6 +45,12 @@
     text-decoration: underline;
 }
 
+.related-btn:visited {
+    text-decoration: none;
+    color: #d81616;
+
+}
+
 
 .container {
     font-family: 'Arvo', serif;
