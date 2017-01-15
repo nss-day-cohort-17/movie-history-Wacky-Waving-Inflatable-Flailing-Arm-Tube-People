@@ -241,7 +241,9 @@ background: #428bca;
     background: #3276B1;
 }
 
-
+.close {
+    margin: .5em;
+}
 
 
 

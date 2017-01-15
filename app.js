@@ -144,6 +144,7 @@ function yourMovies(data) {
                                          <div class="modal fade bs-example-modal-lg${i}" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                                            <div class="modal-dialog modal-lg" id="${i}" role="document">
                                              <div class="modal-content">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                <h4 class="text-center">${data[id].Title}</h4>
                                                <img src="${data[id].Poster}" class="img-responsive center-block" alt="">
                                                <p class="text-center">${data[id].Year}</p>
@@ -210,8 +211,3 @@ function moveCard(e) {
       })
 }
 
-
-
-$('#myModal').modal('hide');
-$('body').removeClass('modal-open');
-$('.modal-backdrop').remove();
