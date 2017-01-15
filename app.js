@@ -20,7 +20,6 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
-    //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "GET", yourMovies);
   $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`).then(yourMovies);
   $(".myList-view").removeClass("hide");
   $(".search-view").addClass("hide");
@@ -31,7 +30,6 @@ $("#myList").click(function () {
 });
 
 $('#recentlyWatched').click(function(){
-  //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "GET", yourMovies);
   $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`).then(yourMovies);
   $(".myList-view").addClass("hide");
   $(".search-view").addClass("hide");
@@ -190,7 +188,6 @@ function removeCard(data){
         datatype   : "json",
         type       : "DELETE",
       });
-        //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
     })
 };
 
