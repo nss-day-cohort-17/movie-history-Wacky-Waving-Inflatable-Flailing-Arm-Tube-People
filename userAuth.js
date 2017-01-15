@@ -15,17 +15,17 @@ firebase.auth().onAuthStateChanged(() => {
     userID = firebase.auth().currentUser.uid;
     console.log(firebase.auth().currentUser);
     console.log("logged in");
-    $(".register").slideDown("slow").hide();
-    $(".login").slideDown("slow").hide();
-    $(".nav-link").slideDown("slow");
-    $(".logout").slideDown("slow");
+    $(".register").addClass("hidden");
+    $(".login").addClass("hidden");
+    $(".nav-link").hide().removeClass("hidden").delay(3300).slideDown("slow");
+    $(".logout").hide().removeClass("hidden").delay(3300).slideDown("slow");
 
   } else {
     console.log("logged out");
-    $(".register").slideDown("slow");
-    $(".login").slideDown("slow");
-    $(".nav-link").slideDown("slow").hide();
-    $(".logout").slideDown("slow").hide();
+    $(".register").hide().removeClass("hidden").delay(700).slideDown("slow");
+    $(".login").hide().removeClass("hidden").delay(700).slideDown("slow");
+    $(".nav-link").addClass("hidden");
+    $(".logout").addClass("hidden");
   }
 });
 
@@ -76,8 +76,7 @@ function handleAuthErrors(error) {
   $(".input-group-addon").css("background", "#d9534f");
 
 
-  progress.delay(800)
-          .fadeOut(400);
+  progress.fadeOut(1200);
 
   button.text("Try Again!")
         .removeClass("btn-primary")
@@ -91,8 +90,7 @@ function handleAuthErrors(error) {
 
         })
   button
-    .delay(1000)
-    .fadeIn(500)
+    .fadeIn(1200)
     .removeClass("btn-danger")
     .addClass("btn-primary")
 
@@ -129,15 +127,14 @@ function authSuccess() {
     $(".modal-user").css("border-color", "#5cb85c");
     $(".input-group-addon").css("background", "#5cb85c");
 
-    progress.delay(1000)
-            .fadeOut(200);
+    progress.fadeOut(1200);
 
     button.removeClass("btn-primary")
           .addClass("btn-success")
           .blur()
           .delay(1200)
           .fadeIn(function () {
-            button.text("Enjoy!")
+            button.text("Enjoy!");
             title.text("Welcome!");
             button.attr("data-dismiss", "modal");
 
