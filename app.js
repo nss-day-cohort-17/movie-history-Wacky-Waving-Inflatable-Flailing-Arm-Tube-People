@@ -78,6 +78,24 @@ function addListenersToListViews() {
   });
 }
 
+function displayRelatedResults(data) {
+  console.log(data.Search);
+  $(".related-results").html(`
+                              <h4>Related:</h4>
+                              <ul>
+                                  <li><a class="related-btn">${data.Search[0].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[1].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[2].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[3].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[4].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[5].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[6].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[7].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[8].Title}</a></li>
+                                  <li><a class="related-btn">${data.Search[9].Title}</a></li>
+                              </ul>
+                            `)
+}
 
 function getMovieData(data) {
   currentMovie = data;
@@ -163,6 +181,7 @@ function ajaxCall(url, dType, type, fn, sendData) {
 
 $("#searchBtn").click(function() {
   ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "json", "GET", getMovieData);
+  $.getJSON(`http://www.omdbapi.com/?s=${$("#userInput").val()}`).then(displayRelatedResults);
   $(".carousel").addClass("hide");
   $(".search-result-view").removeClass("hide");
 });
