@@ -17,8 +17,8 @@ firebase.auth().onAuthStateChanged(() => {
     console.log("logged in");
     $(".register").addClass("hidden");
     $(".login").addClass("hidden");
-    $(".nav-link").hide().removeClass("hidden").delay(3300).slideDown("slow");
-    $(".logout").hide().removeClass("hidden").delay(3300).slideDown("slow");
+    $(".nav-link").hide().removeClass("hidden").delay(2000).slideDown("slow");
+    $(".logout").hide().removeClass("hidden").delay(2000).slideDown("slow");
 
   } else {
     console.log("logged out");
@@ -123,7 +123,8 @@ function authSuccess() {
 
     progress.show();
     progressBar.css("background-color", "#5cb85c");
-    progressBar.animate({ width: "100%" }, 100);
+    progressBar.animate({ width: "100%" }, 100)
+    progressBar.css("background-color", "#5cb85c");
     $(".modal-user").css("border-color", "#5cb85c");
     $(".input-group-addon").css("background", "#5cb85c");
 
