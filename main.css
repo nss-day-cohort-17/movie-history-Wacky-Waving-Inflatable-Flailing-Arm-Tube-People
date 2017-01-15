@@ -182,7 +182,7 @@ background: #428bca;
     max-width: 300px;
 }
 
-.modal-content {
+.modal-user {
     padding: 9%;
     border: 1px solid red;
 }
@@ -196,7 +196,7 @@ background: #428bca;
 /***** USER AUTH STYLES *****/
 
 
-.modal-dialog {
+.modal-userAuth {
     width: 300px;
 }
 .modal-footer {
