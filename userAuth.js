@@ -71,7 +71,10 @@ function handleAuthErrors(error) {
   progress.show();
 
   progressBar.animate({ width: "100%" }, 100);
-  progressBar.css("background-color", "red");
+  progressBar.css("background-color", "#d9534f");
+  $(".modal-user").css("border-color", "#d9534f");
+  $(".input-group-addon").css("background", "#d9534f");
+
 
   progress.delay(800)
           .fadeOut(400);
@@ -121,8 +124,10 @@ function authSuccess() {
     button.hide();
 
     progress.show();
-    progressBar.css("background-color", "#337ab7");
+    progressBar.css("background-color", "#5cb85c");
     progressBar.animate({ width: "100%" }, 100);
+    $(".modal-user").css("border-color", "#5cb85c");
+    $(".input-group-addon").css("background", "#5cb85c");
 
     progress.delay(1000)
             .fadeOut(200);
@@ -157,7 +162,8 @@ $('#myModal').on('hidden.bs.modal', function (e) {
   inputs.removeClass("hidden");
 
   progressBar.css({ "width": "0%" });
-
+  $(".modal-user").css("border-color", "#3276B1");
+  $(".input-group-addon").css("background", "#3276B1");
   button.removeClass("btn-success")
         .addClass("btn-primary")
         .text("Submit")
