@@ -5,13 +5,9 @@ var flag;
 
 // ---------- NAV EVENTLISTENERS --------------
 
-$("#home").click(function () {
-  $(".home").removeClass("hide");
-  $(".myList-view").addClass("hide");
-  $(".recentlyWatched-view").addClass("hide");
-  $(".search-view").addClass("hide");
-  $(".heading h1").html("Movie History")
-});
+$(".logout").click(homeView);
+
+$("#home").click(homeView);
 
 $("#new-movies").click(function () {
   $(".myList-view").addClass("hide");
@@ -47,7 +43,13 @@ $('#recentlyWatched').click(function(){
 // ---------- HELPER FUNCTIONS --------------
 
 
-function nothing(data) {}
+function homeView () {
+  $(".home").removeClass("hide");
+  $(".myList-view").addClass("hide");
+  $(".recentlyWatched-view").addClass("hide");
+  $(".search-view").addClass("hide");
+  $(".heading h1").html("Movie History")
+}
 
 function addListenersToSearchView() {
 
