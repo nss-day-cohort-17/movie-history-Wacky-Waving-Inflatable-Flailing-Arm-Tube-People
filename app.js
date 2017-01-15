@@ -59,7 +59,7 @@ function addListenersToSearchView() {
   $("#addToMyList").click(function () {
     console.log("it worked");
     //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster", ""]));
     $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
@@ -87,6 +87,7 @@ function addListenersToListViews() {
 
 function getMovieData(data) {
   currentMovie = data;
+  console.log(data);
   $("#userInput").val("");
   $(".search-result-view").html(`
                                 <img src="${data.Poster}" alt="movie cover image">
@@ -162,7 +163,7 @@ function yourMovies(data) {
 
     addListenersToListViews()
     removeCard(data)
-    rate()
+    rate(data)
 }
 
 
@@ -193,7 +194,7 @@ function removeCard(data){
         url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
         datatype   : "json",
         type       : "DELETE",
-      });
+        });
         //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
     })
 };
@@ -203,10 +204,7 @@ $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
 
 
-
-
 function rate(data){
-
   /* 1. Visualizing things on Hover - See next part for action on click */
   $('#stars li').on('mouseover', function(){
     var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -229,9 +227,15 @@ function rate(data){
 
 
   /* 2. Action to perform on click */
-  $('#stars li').on('click', function(){
+  $('#stars li').on('click', function(e){
     var onStar = parseInt($(this).data('value'), 10); // The star currently selected
     var stars = $(this).parent().children('li.star');
+
+    var card = e.target.closest(".card")
+    var titleTarget = $(card).find('.card-title')[0].innerHTML
+    // console.log(titleTarget, divToRemove);
+    var key = _.findKey(data, ['Title', titleTarget]);
+    console.log(key);
 
     for (i = 0; i < stars.length; i++) {
       $(stars[i]).removeClass('selected');
@@ -243,6 +247,15 @@ function rate(data){
 
     // JUST RESPONSE (Not needed)
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+    console.log(ratingValue);
+    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${key}/.json`, `${ratingValue}`);
+    
+    // $.ajax({
+    //     url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
+    //     datatype   : "json",
+    //     type       : "PATCH",
+    // });
+
     var msg = "";
     if (ratingValue > 1) {
         msg = "Thanks! You rated this " + ratingValue + " stars.";
@@ -254,9 +267,7 @@ function rate(data){
 
   });
 
-
 };
-
 
 function responseMessage(msg) {
     alert(msg)
