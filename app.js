@@ -56,52 +56,58 @@ function addListenersToSearchView() {
 
   $("#addToMyList").click(function () {
     console.log("it worked");
-    //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
     $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
     $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
     $("#addToRecentlyWatched").click(function (e) {
       console.log("it worked recently watched");
-      //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
       $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
 
     });
 };
 
-function addListenersToListViews() {
 
-  //$("#readPlot").click(function () {
-  //  console.log("it worked plot");
-  //  //ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-  //});
 
-  $("#removeMovie").click(function () {
-    console.log("it worked remove");
-    //ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-  });
-};
-
-function displayRelatedResults(data) {
-  console.log(data.Search);
-  $(".related-results").html(`
-                              <h4>Related:</h4>
-                              <ul>
-                                  <li><a class="related-btn">${data.Search[0].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[1].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[2].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[3].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[4].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[5].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[6].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[7].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[8].Title}</a></li>
-                                  <li><a class="related-btn">${data.Search[9].Title}</a></li>
-                              </ul>
-                            `)
+function getData() {
+  $.getJSON(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`)
+   .then(displayMovieData)
+   .then(() => {
+     $(".search-result-view").removeClass("hide");
+   });
+  $.getJSON(`http://www.omdbapi.com/?s=${$("#userInput").val()}`)
+    .then(displayRelatedResults)
+    .then(clickOnRelated);
 }
 
-function getMovieData(data) {
+function displayRelatedResults(data) {
+  console.log(data);
+  var relatedString = "<h4>Related:</h4><ul>";
+
+  for (var i = 0; i < data.Search.length; i++) {
+    relatedString += `<li><a  href="#" class="related-btn">${data.Search[i].Title}</a></li>`
+  }
+    relatedString += "</ul>";
+  $(".related-results").html(relatedString);
+}
+
+function clickOnRelated() {
+  $(".related-results").click(function (e) {
+    if (e.target.tagName === "A") {
+      var newSearch = e.target.innerHTML;
+    }
+      $.getJSON(`http://www.omdbapi.com/?t=${newSearch}&y=&plot=full&r=json`)
+       .then(displayMovieData)
+       .then(() => {
+         $(".search-result-view").removeClass("hide");
+       });
+      $.getJSON(`http://www.omdbapi.com/?s=${newSearch}`)
+       .then(displayRelatedResults)
+       .then(clickOnRelated);
+  })
+};
+
+function displayMovieData(data) {
   currentMovie = data;
   $("#userInput").val("");
   $(".search-result-view").html(`
@@ -162,15 +168,7 @@ function yourMovies(data) {
 // ---------- CARD EVENTLISTENERS --------------
 
 
-$("#searchBtn").click(function() {
-  //ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "GET")
-  $.getJSON(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`)
-    .then(getMovieData)
-    .then(() => {
-      $(".search-result-view").removeClass("hide");
-    });
-  $.getJSON(`http://www.omdbapi.com/?s=${$("#userInput").val()}`).then(displayRelatedResults);
-});
+$("#searchBtn").click(getData);
 
 function removeCard(data){
     var keyToDelete;
