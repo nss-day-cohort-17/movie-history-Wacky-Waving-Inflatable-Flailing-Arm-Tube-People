@@ -181,6 +181,7 @@ function yourMovies(data) {
                      </div>
                 </div>
                 <button type="button" class="btn-list btn-danger removeMovie">Remove</button>
+                <button type="button" class="btn-list btn-danger moveMovie">Watched</button>
             </div>
         </div>
         `);
@@ -188,12 +189,12 @@ function yourMovies(data) {
 
     });
 
-    //addListenersToListViews()
-    if ($(".myList-view").hasClass("hide")) {
+    if($(".myList-view").hasClass("hide")) {
       $(".onlyMyList").addClass("hide");
-    } else {
-      $(".onlyMyList").removeClass("hide");
+      }else{
+          $(".onlyMyList").removeClass("hide");
     }
+
   $('.removeMovie').click(removeCard);
   $('.moveMovie').click(moveCard);
   rate(data)
@@ -224,6 +225,22 @@ function removeCard(e){
 
         });
     };
+
+function moveCard(e) {
+
+  var divToRemove = e.target.closest(".card")
+  var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
+  keyToMove = _.findKey(dbSnapshot, ["Title", titleTarget]);
+  $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view/${keyToMove}.json`)
+   .then(function (data) {
+     removeCard(e);
+     divToRemove.remove();
+     $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(data, ["Title", "Year", "Actors", "Plot", "Poster"]))
+   })
+   .then(function () {
+     console.log("Moved");
+   })
+}
 
 
 
@@ -299,22 +316,5 @@ function rate(data){
 // }
 
 
-
-
-function moveCard(e) {
-
-  var divToRemove = e.target.closest(".card")
-  var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
-  keyToMove = _.findKey(dbSnapshot, ["Title", titleTarget]);
-  $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view/${keyToMove}.json`)
-    .then(function (data) {
-      removeCard(e);
-      divToRemove.remove();
-      $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(data, ["Title", "Year", "Actors", "Plot", "Poster"]))
-      })
-        .then(function () {
-      console.log("Moved");
-      })
-}
 
 
