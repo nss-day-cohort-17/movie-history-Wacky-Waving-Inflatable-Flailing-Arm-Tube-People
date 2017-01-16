@@ -50,7 +50,7 @@ function homeView () {
   $(".myList-view").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
   $(".search-view").addClass("hide");
-  $(".heading h1").html("Movie History")
+  $(".heading h1").html("In Theaters")
 }
 
 function addListenersToSearchView() {
