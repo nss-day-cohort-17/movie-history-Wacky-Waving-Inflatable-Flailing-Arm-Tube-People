@@ -32,15 +32,15 @@
 
 
                 <div class=" nav-element navbar-right col-sm-1">
-                  <a class="nav-btn register" data-toggle="modal" data-target="#myModal" data-whatever="register">
+                  <a class="nav-btn register" href="#" data-toggle="modal" data-target="#myModal" data-whatever="register">
                     Register
                   </a>
-                  <a class="nav-btn logout navBtn">
+                  <a class="nav-btn logout navBtn" href="#">
                     Logout
                   </a>
                 </div>
               <div class=" nav-element navbar-right col-sm-1">
-                <a class="nav-btn login" data-toggle="modal" data-target="#myModal" data-whatever="login">
+                <a class="nav-btn login" href="#"data-toggle="modal" data-target="#myModal" data-whatever="login">
                   Login
                 </a>
               </div>
@@ -158,13 +158,14 @@
             <!-- SEARCH DISPLAY-->
 
 
-            <div class="container search-view hide">
+            <div class="search-view hide">
                 <form id="search-form" onSubmit="event.preventDefault();">
                     <input type="text" id="userInput" placeholder="find any movie in the universe...">
                     <button type="submit" name="button" id="searchBtn">Search</button>
                 </form>
 
-                <div class="col-sm-10 col-sm-offset-1 search-result-view hide"></div>
+                <div class="col-sm-8 search-result-view hide"></div>
+              <div class="col-sm-4 related-results"></div>
 
             </div>
 

@@ -34,6 +34,24 @@
 
 }
 
+.related-btn {
+    color: #d81616;
+    text-decoration: none;
+}
+
+.related-btn:hover {
+
+    color: #d81616;
+    text-decoration: underline;
+}
+
+.related-btn:visited {
+    text-decoration: none;
+    color: #d81616;
+
+}
+
+
 .container {
     font-family: 'Arvo', serif;
     padding: 0;
@@ -95,8 +113,11 @@
 }
 
 .search-view img {
-    margin: 0 0 4% 4%;
-    float: right;
+    margin: 0 4% 4% 0;
+    height:300px;
+    width: 200px;
+
+    float: left;
 }
 
 .search-view h3 {
@@ -105,6 +126,10 @@
 
 .search-view button {
     margin-bottom: .5%;
+}
+
+.related-results a {
+    display: block;
 }
 
 
@@ -215,6 +240,7 @@ background: #428bca;
     color: #fff;
     background: #3276B1;
 }
+
 
 .clearfix {
   clear: both;
@@ -331,9 +357,13 @@ pre {
 
 .section:before,
 .section:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+.close {
+    margin: .5em;
 }
 
 

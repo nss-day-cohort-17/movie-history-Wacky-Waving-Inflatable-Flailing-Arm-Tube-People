@@ -2,6 +2,7 @@
 var currentMovie;
 var currentView;
 var flag;
+var dbSnapshot;
 
 // ---------- NAV EVENTLISTENERS --------------
 
@@ -20,24 +21,22 @@ $("#new-movies").click(function () {
 
 
 $("#myList").click(function () {
-    //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "GET", yourMovies);
   $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`).then(yourMovies);
   $(".myList-view").removeClass("hide");
   $(".search-view").addClass("hide");
   $(".home-view").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
-  $(".heading h1").html("My List")
+  $(".heading h1").html("My List");
   flag = true;
 });
 
 $('#recentlyWatched').click(function(){
-  //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "GET", yourMovies);
   $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`).then(yourMovies);
   $(".myList-view").addClass("hide");
   $(".search-view").addClass("hide");
   $(".home-view").addClass("hide");
   $(".recentlyWatched-view").removeClass("hide");
-  $(".heading h1").html("Recently Watched")
+  $(".heading h1").html("Recently Watched");
   flag = false;
 });
 
@@ -58,34 +57,58 @@ function addListenersToSearchView() {
 
   $("#addToMyList").click(function () {
     console.log("it worked");
-    //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster", ""]));
+
+    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
+
     $(".search-result-view #addToMyList").addClass(" btn-success")
   });
 
-    $("#addToRecentlyWatched").click(function (e) {
+    $("#addToRecentlyWatched").click(function () {
       console.log("it worked recently watched");
-      //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
       $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
 
     });
 };
 
-function addListenersToListViews() {
+function getData() {
+  $.getJSON(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`)
+   .then(displayMovieData)
+   .then(() => {
+     $(".search-result-view").removeClass("hide");
+   });
+  $.getJSON(`http://www.omdbapi.com/?s=${$("#userInput").val()}`)
+    .then(displayRelatedResults)
+    .then(clickOnRelated);
+}
 
-  //$("#readPlot").click(function () {
-  //  console.log("it worked plot");
-  //  //ajaxCall("https://movie-history-2c05c.firebaseio.com/myList-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-  //});
+function displayRelatedResults(data) {
+  console.log(data);
+  var relatedString = "<h4>Related:</h4><ul>";
 
-  $("#removeMovie").click(function () {
-    console.log("it worked remove");
-    //ajaxCall("https://movie-history-2c05c.firebaseio.com/recentlyWatched-view.json", "json", "POST", nothing, JSON.stringify(currentMovie, ["Title", "Year", "Actors", "Plot", "Poster"]));
-  });
+  for (var i = 0; i < data.Search.length; i++) {
+    relatedString += `<li><a  href="#" class="related-btn">${data.Search[i].Title}</a></li>`
+  }
+    relatedString += "</ul>";
+  $(".related-results").html(relatedString);
+}
+
+function clickOnRelated() {
+  $(".related-results").click(function (e) {
+    if (e.target.tagName === "A") {
+      var newSearch = e.target.innerHTML;
+    }
+      $.getJSON(`http://www.omdbapi.com/?t=${newSearch}&y=&plot=full&r=json`)
+       .then(displayMovieData)
+       .then(() => {
+         $(".search-result-view").removeClass("hide");
+       });
+      $.getJSON(`http://www.omdbapi.com/?s=${newSearch}`)
+       .then(displayRelatedResults)
+       .then(clickOnRelated);
+  })
 };
 
-
-function getMovieData(data) {
+function displayMovieData(data) {
   currentMovie = data;
   console.log(data);
   $("#userInput").val("");
@@ -104,7 +127,10 @@ function getMovieData(data) {
 
 
 function yourMovies(data) {
+
   console.log(data);
+  dbSnapshot = data;
+
   if (flag) {
     currentView = "myList-view";
   } else {
@@ -162,47 +188,44 @@ function yourMovies(data) {
 
     });
 
-    addListenersToListViews()
-    removeCard(data)
-    rate(data)
+    //addListenersToListViews()
+    if ($(".myList-view").hasClass("hide")) {
+      $(".onlyMyList").addClass("hide");
+    } else {
+      $(".onlyMyList").removeClass("hide");
+    }
+  $('.removeMovie').click(removeCard);
+  $('.moveMovie').click(moveCard);
+  rate(data)
+
 }
 
 
-// ---------- CARD EVENTLISTENERS --------------
+// ---------- CARD FUNCTIONS --------------
 
 
-$("#searchBtn").click(function() {
-  //ajaxCall(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`, "GET")
-  $.getJSON(`http://www.omdbapi.com/?t=${$("#userInput").val()}&y=&plot=full&r=json`)
-    .then(getMovieData)
-    .then(() => {
-      $(".search-result-view").removeClass("hide");
-    })
-});
+$("#searchBtn").click(getData);
+//$('.removeMovie').click(removeCard);
 
-function removeCard(data){
+
+function removeCard(e){
     var keyToDelete;
-
-    $('.removeMovie').click(function(e) {
         var divToRemove = e.target.closest(".card")
         var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
         console.log(titleTarget, divToRemove);
         divToRemove.remove();
-        keyToDelete = _.findKey(data, ['Title', titleTarget]);
+        keyToDelete = _.findKey(dbSnapshot, ["Title", titleTarget]);
         console.log(keyToDelete);
 
         $.ajax({
         url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
         datatype   : "JSON",
         type       : "DELETE",
-        });
-        //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
-    })
-};
 
-$('#myModal').modal('hide');
-$('body').removeClass('modal-open');
-$('.modal-backdrop').remove();
+        });
+    };
+
+
 
 
 function rate(data){
@@ -265,7 +288,7 @@ function rate(data){
     var msg = "You rated this " + ratingValue + " stars.";
     // responseMessage(msg);
     console.log(msg);
-  });
+  })
 
 };
 
@@ -274,3 +297,24 @@ function rate(data){
 //   // $('.success-box').fadeIn(200);
 //   // $('.success-box div.text-message').html("<span>" + msg + "</span>");
 // }
+
+
+
+
+function moveCard(e) {
+
+  var divToRemove = e.target.closest(".card")
+  var titleTarget = $(divToRemove).find('.card-title')[0].innerHTML
+  keyToMove = _.findKey(dbSnapshot, ["Title", titleTarget]);
+  $.getJSON(`https://movie-history-2c05c.firebaseio.com/${userID}/myList-view/${keyToMove}.json`)
+    .then(function (data) {
+      removeCard(e);
+      divToRemove.remove();
+      $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/recentlyWatched-view.json`, JSON.stringify(data, ["Title", "Year", "Actors", "Plot", "Poster"]))
+      })
+        .then(function () {
+      console.log("Moved");
+      })
+}
+
+
