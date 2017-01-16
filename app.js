@@ -104,6 +104,7 @@ function getMovieData(data) {
 
 
 function yourMovies(data) {
+  console.log(data);
   if (flag) {
     currentView = "myList-view";
   } else {
