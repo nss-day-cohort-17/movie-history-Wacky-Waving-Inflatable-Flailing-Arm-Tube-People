@@ -290,10 +290,10 @@ function rate(data){
     console.log(ratingValue);
 
     $.ajax({
-      url : `https://movie-history-2c05c.firebaseio.com/${userID}/${userID}/${key}/.json`,
+      url : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${key}/.json`,
       datatype : 'JSON',
       type : 'PATCH',
-      data : JSON.stringify( { "Rating" : ratingValue })
+      data : JSON.stringify( { "Rating" : `${ratingValue}` })
 
     }).then(function () {
       console.log()
