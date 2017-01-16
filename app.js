@@ -192,7 +192,7 @@ function removeCard(data){
 
         $.ajax({
         url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
-        datatype   : "json",
+        datatype   : "JSON",
         type       : "DELETE",
         });
         //ajaxCall(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`, "json", "DELETE", nothing)
@@ -248,7 +248,18 @@ function rate(data){
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
     console.log(ratingValue);
 
-    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/${userID}/${key}/.json`, JSON.stringify( { "Rating" : `${ratingValue}` } ));
+    $.ajax({
+      url : `https://movie-history-2c05c.firebaseio.com/${userID}/${userID}/${key}/.json`,
+      datatype : 'JSON',
+      type : 'PATCH',
+      data : JSON.stringify( { "Rating" : ratingValue })
+
+    }).then(function () {
+      console.log()
+    })
+
+
+    //$.post(`https://movie-history-2c05c.firebaseio.com/${userID}/${userID}/${key}/.json`, JSON.stringify( { "Rating" : `${ratingValue}` } ));
 
     var msg = "You rated this " + ratingValue + " stars.";
     // responseMessage(msg);
