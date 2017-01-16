@@ -3,10 +3,187 @@
     <head>
         <meta charset="utf-8">
         <title>Movie History</title>
+        <link href="https://fonts.googleapis.com/css?family=Arvo|Bungee+Shade|Jura" rel="stylesheet">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
 
+        <nav id="nav-height" class="navbar navbar-default navbar-static-top">
+            <div class="container">
+
+
+                <div class="nav-element col-sm-1">
+                    <a class="nav-btn nav-link" href="#" id="home">Home</a>
+                </div>
+
+                <div class="nav-element col-sm-1">
+                    <a class="nav-btn nav-link" href="#" id="new-movies">Find</a>
+                </div>
+
+                <div class="nav-element col-sm-1">
+                    <a class="nav-btn nav-link" href="#" id="myList">My List</a>
+                </div>
+
+                <div class="nav-element col-sm-1">
+                    <a class="nav-btn nav-link" href="#" id="recentlyWatched">Watched</a>
+                </div>
+
+
+                <div class=" nav-element navbar-right col-sm-1">
+                  <a class="nav-btn register" data-toggle="modal" data-target="#myModal" data-whatever="register">
+                    Register
+                  </a>
+                  <a class="nav-btn logout navBtn">
+                    Logout
+                  </a>
+                </div>
+              <div class=" nav-element navbar-right col-sm-1">
+                <a class="nav-btn login" data-toggle="modal" data-target="#myModal" data-whatever="login">
+                  Login
+                </a>
+              </div>
+
+            </div>
+        </nav>
+
+        <!-- USER AUTH MODAL -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-userAuth">
+            <div class="modal-content modal-user">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Register Now!</h4>
+              </div> <!-- /.modal-header -->
+
+              <div class="modal-body">
+                <form role="form" id="loginForm">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="uLogin" placeholder="Email">
+                      <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+                    </div>
+                  </div> <!-- /.form-group -->
+
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="password" class="form-control" id="uPassword" placeholder="Password">
+                      <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                    </div> <!-- /.input-group -->
+                  </div> <!-- /.form-group -->
+
+                </form>
+
+              </div> <!-- /.modal-body -->
+
+              <div class="modal-footer">
+                <button class="form-control btn btn-primary">Submit</button>
+
+
+                <div class="progress">
+                  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+                    <span class="sr-only">progress</span>
+                  </div>
+                </div>
+              </div> <!-- /.modal-footer -->
+
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- END USER AUTH MODAL -->
+
+
+        <div class="display-container row">
+            <!--  TITLE -->
+            <div class="heading col-sm-12">
+                <h1>Movie History</h1>
+            </div>
+        </div>
+
+        <!-- ALL CONTENT -->
+        <div class="container">
+
+            <div class="home-view">
+
+                <div class="container">
+                    <div class="row">
+                		<div class="col-md-12">
+                                <div id="Carousel" class="carousel slide">
+
+                                <ol class="carousel-indicators">
+                                    <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#Carousel" data-slide-to="1"></li>
+                                    <li data-target="#Carousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+
+                                <div class="item active">
+                                	<div class="row">
+                                	  <div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://img.lum.dolimg.com/v1/images/rogueone_onesheeta_1000_309ed8f6.jpeg?region=0%2C0%2C1000%2C1481&width=480" alt="Image"></a></div>
+                                	  <div class="col-md-4"><a href="#" ><img class="thumbnail" src="https://cdn.traileraddict.com/content/warner-bros-pictures/live-by-night-poster.jpg" alt="Image"></a></div>
+                                	  <div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://www.awardsdaily.com/wp-content/uploads/2016/08/1.jpg" alt="Image"></a></div>
+                                	</div><!--.row-->
+                                </div><!--.item-->
+
+                                <div class="item">
+                                	<div class="row">
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://www.blackfilm.com/read/wp-content/uploads/2016/08/Hidden-Figures-poster.jpg" alt="Image"></a></div>
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://static2.hypable.com/wp-content/uploads/2016/09/passengers.jpg" alt="Image"></a></div>
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://cdn2-www.comingsoon.net/assets/uploads/gallery/fences/fences.jpg" alt="Image"></a></div>
+                                	</div><!--.row-->
+                                </div><!--.item-->
+
+                                <div class="item">
+                                	<div class="row">
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://www.awardsdaily.com/wp-content/uploads/2016/09/manchester.jpg" alt="Image"></a></div>
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="data:image/jpeg;base64,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" alt="Image"></a></div>
+                                		<div class="col-md-4"><a href="#" ><img class="thumbnail" src="http://tomandlorenzo.com/wp-content/uploads/2016/10/jackie-poster-1.jpg" alt="Image"></a></div>
+                                	</div><!--.row-->
+                                </div><!--.item-->
+
+                                </div><!--.carousel-inner-->
+                                  <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
+                                  <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+                                </div><!--.Carousel-->
+
+                		</div>
+                	</div>
+                </div><!--.container-->
+            </div>
+
+            <!-- SEARCH DISPLAY-->
+
+
+            <div class="container search-view hide">
+                <form id="search-form" onSubmit="event.preventDefault();">
+                    <input type="text" id="userInput" placeholder="find any movie in the universe...">
+                    <button type="submit" name="button" id="searchBtn">Search</button>
+                </form>
+
+                <div class="col-sm-10 col-sm-offset-1 search-result-view hide"></div>
+
+            </div>
+
+
+
+            <!-- YOUR MOVIE DISPLAY -->
+            <div class="movies center-block row myList-view hide">
+
+            </div>
+
+            <!-- YOUR RECENTLY WATCHED -->
+            <div class="movies center-block row recentlyWatched-view"></div>
+        </div>
+
+    <script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+    <script type="text/javascript" src="userAuth.js"></script>
     <script type="text/javascript" src="app.js"></script>
     </body>
 </html>
