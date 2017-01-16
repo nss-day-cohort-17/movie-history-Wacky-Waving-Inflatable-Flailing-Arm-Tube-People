@@ -230,10 +230,8 @@ function rate(data){
   $('#stars li').on('click', function(e){
     var onStar = parseInt($(this).data('value'), 10); // The star currently selected
     var stars = $(this).parent().children('li.star');
-
     var card = e.target.closest(".card")
     var titleTarget = $(card).find('.card-title')[0].innerHTML
-    // console.log(titleTarget, divToRemove);
     var key = _.findKey(data, ['Title', titleTarget]);
     console.log(key);
 
@@ -248,29 +246,22 @@ function rate(data){
     // JUST RESPONSE (Not needed)
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
     console.log(ratingValue);
-    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${key}/.json`, `${ratingValue}`);
-    
-    // $.ajax({
-    //     url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${keyToDelete}/.json`,
-    //     datatype   : "json",
-    //     type       : "PATCH",
-    // });
 
-    var msg = "";
-    if (ratingValue > 1) {
-        msg = "Thanks! You rated this " + ratingValue + " stars.";
-    }
-    else {
-        msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
-    }
-    responseMessage(msg);
+    $.ajax({
+        url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${key}/${ratingValue}.json`,
+        datatype   : "json",
+        type       : "PATCH"
+    });
+
+    var msg = "You rated this " + ratingValue + " stars.";
+    // responseMessage(msg);
 
   });
 
 };
 
-function responseMessage(msg) {
-    alert(msg)
-  // $('.success-box').fadeIn(200);
-  // $('.success-box div.text-message').html("<span>" + msg + "</span>");
-}
+// function responseMessage(msg) {
+//     alert(msg)
+//   // $('.success-box').fadeIn(200);
+//   // $('.success-box div.text-message').html("<span>" + msg + "</span>");
+// }
