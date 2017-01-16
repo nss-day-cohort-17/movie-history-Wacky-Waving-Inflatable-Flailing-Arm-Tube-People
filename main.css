@@ -59,13 +59,13 @@
 }
 
 #search-form {
-    margin: 0px 0 4% 10%;
+    margin: 1% 0 4% 0%;
     display: flex;
 
 }
 
 #userInput {
-    width: 79%;
+    width: 90%;
     padding: 0;
     height: 50px;
     font-size: 2em;

@@ -46,7 +46,7 @@ $('#recentlyWatched').click(function(){
 
 
 function homeView () {
-  $(".home").removeClass("hide");
+  $(".home-view").removeClass("hide");
   $(".myList-view").addClass("hide");
   $(".recentlyWatched-view").addClass("hide");
   $(".search-view").addClass("hide");
@@ -210,4 +210,3 @@ function moveCard(e) {
       console.log("Moved");
       })
 }
-
