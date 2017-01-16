@@ -12,6 +12,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "lodash": "^4.17.4",
+    "firebase": "^3.6.5"
   }
 }

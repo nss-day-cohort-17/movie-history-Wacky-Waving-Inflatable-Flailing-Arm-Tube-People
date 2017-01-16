@@ -1,0 +1,258 @@
+#nav-height{
+    min-height: 65px;
+}
+
+.nav-bar {
+    background-color: #eee;
+    border-bottom: 2px solid black;
+
+}
+
+.nav-element {
+    font-family: 'Arvo', serif;
+    margin: 0 2% 0 0;
+    padding: 2% 0 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.nav-btn {
+    color: #d81616;
+    text-decoration: none;
+}
+
+.nav-btn:hover {
+    font-weight: bold;
+    color: #d81616;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.nav-btn:visited {
+    text-decoration: none;
+    color: #d81616;
+
+}
+
+.related-btn {
+    color: #d81616;
+    text-decoration: none;
+}
+
+.related-btn:hover {
+
+    color: #d81616;
+    text-decoration: underline;
+}
+
+.related-btn:visited {
+    text-decoration: none;
+    color: #d81616;
+
+}
+
+
+.container {
+    font-family: 'Arvo', serif;
+    padding: 0;
+    margin: auto;
+}
+
+#search-form {
+    margin: 1% 0 4% 0%;
+    display: flex;
+
+}
+
+#userInput {
+    width: 90%;
+    padding: 0;
+    height: 50px;
+    font-size: 2em;
+}
+
+#searchBtn {
+    height: 50px;
+    width: 100px;
+}
+
+.heading {
+    text-align: center;
+    margin: 0 0 2% 0;
+}
+
+.heading > h1 {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 6em;
+    margin-top: -8px;
+    margin-bottom: 2px;
+}
+
+.display-container {
+    padding: 0 3%;
+}
+
+.movies {
+    margin: 0 5%;
+}
+
+.movieDisplay {
+    font-family: 'Arvo', serif;
+    min-height: 300px;
+    margin: 1% 0;
+    border: 2px solid black;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.search-view {
+    padding: 0 5%;
+    margin-bottom: 25%;
+}
+
+.search-view img {
+    margin: 0 4% 4% 0;
+    height:300px;
+    width: 200px;
+
+    float: left;
+}
+
+.search-view h3 {
+    margin-top: 0;
+}
+
+.search-view button {
+    margin-bottom: .5%;
+}
+
+.related-results a {
+    display: block;
+}
+
+
+.card {
+    margin: 4%;
+    padding: 3%;
+    min-height: 500px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    text-align: center;
+}
+
+
+.btn-list {
+    margin: .3% 0;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 2px;
+    background-color: black;
+    position: relative;
+    bottom: 0;
+    color: white;
+}
+
+
+.btn-list:hover {
+    background-color: red;
+}
+
+.btn-add {
+    margin: .3% 0;
+    width: 25%;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background-color: black;
+    position: relative;
+    bottom: 0;
+    color: white;
+}
+
+.carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+}
+/* The controlsy */
+.carousel-control {
+	left: -12px;
+    height: 40px;
+	width: 40px;
+    background: none repeat scroll 0 0 #222222;
+    border: 4px solid #FFFFFF;
+    border-radius: 23px 23px 23px 23px;
+    margin-top: 90px;
+}
+.carousel-control.right {
+	right: -12px;
+}
+/* The indicators */
+.carousel-indicators {
+	right: 50%;
+	top: auto;
+	bottom: -10px;
+	margin-right: -19px;
+}
+/* The colour of the indicators */
+.carousel-indicators li {
+	background: #cecece;
+}
+.carousel-indicators .active {
+background: #428bca;
+}
+
+.thumbnail {
+    height: 400px;
+    max-width: 300px;
+}
+
+.modal-user {
+    padding: 9%;
+    border: 2px solid #3276B1;
+}
+
+.text-center {
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
+
+
+/***** USER AUTH STYLES *****/
+
+
+.modal-userAuth {
+    width: 300px;
+}
+.modal-footer {
+    height: 70px;
+    margin: 0;
+}
+.modal-footer .btn {
+    font-weight: bold;
+}
+.modal-footer .progress {
+    display: none;
+    height: 32px;
+    margin: 0;
+}
+.input-group-addon {
+    color: #fff;
+    background: #3276B1;
+}
+
+.close {
+    margin: .5em;
+}
+
+
+
+@media (max-width: 1200px) {
+  .movies {
+    margin: 0 10%;
+  }
+  .card {
+      margin: 7%;
+  }
+
+}
