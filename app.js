@@ -205,6 +205,7 @@ $('.modal-backdrop').remove();
 
 
 function rate(data){
+    // response.addHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE");
   /* 1. Visualizing things on Hover - See next part for action on click */
   $('#stars li').on('mouseover', function(){
     var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
@@ -247,15 +248,11 @@ function rate(data){
     var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
     console.log(ratingValue);
 
-    $.ajax({
-        url        : `https://movie-history-2c05c.firebaseio.com/${userID}/${currentView}/${key}/${ratingValue}.json`,
-        datatype   : "json",
-        type       : "PATCH"
-    });
+    $.post(`https://movie-history-2c05c.firebaseio.com/${userID}/${userID}/${key}/.json`, JSON.stringify( { "Rating" : `${ratingValue}` } ));
 
     var msg = "You rated this " + ratingValue + " stars.";
     // responseMessage(msg);
-
+    console.log(msg);
   });
 
 };
